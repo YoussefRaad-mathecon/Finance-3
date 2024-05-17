@@ -1,6 +1,8 @@
 import numpy as np
 import time
-np.random.seed(100)
+import matplotlib.pyplot as plt
+
+np.random.seed(666)
 
 S0 = 100
 v0 = 0.06
@@ -52,15 +54,15 @@ def priceHestonCallViaEulerMC(S0, v0, r, kappa, theta, sigma, rho, lambdaa, T, n
         S, v_zero_count = generateHestonPathEulerDisc(S0, v0, r, kappa, theta, sigma, rho, lambda_, T, n)
         total_v_zero_count += v_zero_count
         payoffs[i] = max(S[-1] - K, 0)
-        
+
     option_price = np.exp(-r * T) * np.mean(payoffs)
     std_dev = np.std(payoffs) / np.sqrt(N)
     end_time = time.time()
     computing_time = end_time - start_time
     
-    return option_price, std_dev, computing_time, total_v_zero_count
+    return option_price, std_dev, computing_time, total_v_zero_count, payoffs
 
-option_price, std_dev, computing_time, total_v_zero_count = priceHestonCallViaEulerMC(S0, v0, r, kappa, theta, sigma, rho, lambda_, T, n, N, K)
+option_price, std_dev, computing_time, total_v_zero_count, payoffs = priceHestonCallViaEulerMC(S0, v0, r, kappa, theta, sigma, rho, lambda_, T, n, N, K)
 S_test = generateHestonPathEulerDisc(S0, v0, r, kappa, theta, sigma, rho, lambda_, T, n)
 
 print(f"The stock price is (EulerMC): {S_test}")
@@ -69,4 +71,30 @@ print(f"The standard deviation of the option payoff is (EulerMC): {std_dev}")
 print(f"The computing time is (EulerMC): {computing_time} seconds")
 print(f"The count of zero variance occurrences is (EulerMC): {total_v_zero_count}")
 
+num_paths = N
+paths = []
+for i in range(num_paths):
+    S, _ = generateHestonPathEulerDisc(S0, v0, r, kappa, theta, sigma, rho, lambda_, T, n)
+    paths.append(S)
 
+
+# Plotting the stock paths
+plt.figure(figsize=(14, 6))
+for S in paths:
+    plt.plot(S)
+plt.title('Sample Stock Price Paths under the Heston Model')
+plt.xlim(0, 100)
+plt.xlabel('Time Steps')
+plt.ylabel('Stock Prices')
+plt.grid(True)
+plt.show()
+
+
+# Plot the option prices
+plt.figure(figsize=(14, 6))
+plt.plot(payoffs, marker='o', linestyle='-', color='blue')
+plt.title('Payoffs under the Heston Model')
+plt.xlabel('Payoff number')
+plt.ylabel('Payoffs')
+plt.grid(True)
+plt.show()
