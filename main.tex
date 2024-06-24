@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1in]{geometry}
 \usepackage[titletoc,title]{appendix}
@@ -52,6 +52,10 @@
 \newcommand{\lc}{\left\{}
 \newcommand{\rc}{\right\}}
 
+\newcommand{\lb}{\left\[}
+
+\newcommand{\rb}{\right\]}
+
 \pagestyle{fancy}
 \begin{document}
 \begin{titlepage}
@@ -64,7 +68,7 @@
         
         \vspace{0.5cm}
         \LARGE
-        Continuous Time Finance 2 (Finkont2)
+        Continuous Time Finance 2 (FinKont2)
         
         \vspace{0.5cm}
         
@@ -79,9 +83,9 @@
     \begin{center}
         \includegraphics[scale=0.50]{ku_segl.png}
     \end{center}
-    \vspace{5 cm}
+    \vspace{5.5cm}
     \begin{center}
-        \textit{Do not go gentle into that good night}
+        \textit{\href{https://www.youtube.com/watch?v=jXD98S28qT8}{"Dying For The Right Cause. It's The Most Human Thing We Can Do."}}
     \end{center}
 \end{titlepage}
 \captionsetup[figure]{labelfont=bf} \captionsetup[table]{labelfont=bf}
@@ -93,6 +97,21 @@
 \tableofcontents
 \cfoot{\thepage\ / \pageref{LastPage}}
 
+\begin{center}
+    $\dagger$\textbf{Note}$\dagger$
+\end{center}
+\begin{center}
+I have completed the handin assignment as per the instructions provided in the
+assignment description. However, I encountered an issue where certain questions
+appear to be missing:
+\begin{itemize}
+    \item Showing respective conditions for $E_j$ is \textbf{left in} as it is removed in the
+    latest version but no notice was given (Subsection 1.2).
+    \item Showing the solutions of ODE's equation (29) and (30) are given by equation (31)
+    and (32), respectively, are \textbf{left out} since notice was given (Subsection 3.2).
+\end{itemize}
+
+\end{center}
 
 \newpage
 \section{Characteristic functions in the Heston model}
@@ -102,8 +121,8 @@ digit referencing (x.y) where x is the section number and y the equation number.
 \subsection{Changing variables and guessing the form of solution}
 $\textcolor{blue}{\star}$ Let $\Psi_j:=\Psi_{x(T)}^j(x,v,t;u)$, $j=1,2$ and $\tau=T-t$. Let the
 reparametrization of $\Psi_j$ through $\tau=T-t$ be given by
-$\Psi_{x(T)}^j(x,v,\tau;u)$. The transformations of termins in (4) is then given
-by:
+$\Psi_{x(T)}^j(x,v,\tau;u)$. The transformations of terms in equation (4) is then given
+by noticing only the first term depends on $\tau$:
 \begin{align*}
     \frac{\partial }{\partial t}\Psi_{x(T)}^j(x,v,t;u)&=-\frac{\partial }{\partial \tau}\Psi_{x(T)}^j(x,v,\tau;u),\\
     \frac{\partial }{\partial x}\Psi_{x(T)}^j(x,v,t;u)&=\frac{\partial }{\partial x}\Psi_{x(T)}^j(x,v,\tau;u),\\
@@ -112,10 +131,14 @@ by:
     \frac{\partial^2 }{\partial v^2}\Psi_{x(T)}^j(x,v,t;u)&=\frac{\partial^2 }{\partial v^2}\Psi_{x(T)}^j(x,v,\tau;u),\\
     \frac{\partial^2 }{\partial v \partial x}\Psi_{x(T)}^j(x,v,t;u)&=\frac{\partial^2 }{\partial v \partial x}\Psi_{x(T)}^j(x,v,\tau;u).
 \end{align*}
-As the only term that differs from (4) through the reparametrization is
-$\frac{\partial }{\partial t}\Psi_j=-\frac{\partial }{\partial
-\tau}\Psi_{x(T)}^j(x,v,\tau;u)$ we achieve (6) from substitution of the
-different term into (4):
+As the only transformation that differs from equation (4) through the
+reparametrization is the first, namely:
+\begin{align*}
+    \frac{\partial }{\partial t}\Psi_j=-\frac{\partial }{\partial
+\tau}\Psi_{x(T)}^j(x,v,\tau;u),
+\end{align*}
+we achieve equation (6) from substitution of the
+differing term into equation (4) using the shorhand notation:
 \begin{align*}
     0&=-\frac{\partial \Psi_j}{\partial \tau}+(r+u_jv)\frac{\partial \Psi_j}{\partial x}+
     \frac{1}{2}v\frac{\partial^2 \Psi_j}{\partial x^2}+\rho\sigma v \frac{\partial^2 \Psi_j}{\partial v \partial x}+
@@ -123,25 +146,26 @@ different term into (4):
 \end{align*}
 as desired.
 
-The terminal condition follows simply from observering that at the boundary $t=T$
-and thus $\tau=T-t=T-T=0$. Hence, through the reparametrization using $\tau$ we
-achieve (7):
+The terminal condition follows simply from observering that at $t=T$
+we have $\tau=T-t=T-T=0$. Hence, through the reparametrization using $\tau$ we
+achieve equation (7):
 \begin{align*}
-    e^{iux}=\Psi_{x(T)}^j(x,v,\tau;u) \quad \forall (x, v) \in \mathbb{R} \times (0, +\infty),
+    e^{iux}=\Psi_{x(T)}^j(x,v,0;u) \quad \forall (x, v) \in \mathbb{R} \times (0, +\infty),
 \end{align*}
 as desired.
+
 \newpage
-$\textcolor{blue}{\star}$ (8) is given by:
+$\textcolor{blue}{\star}$ Equation (8) is given by:
 \begin{align*}
     \Psi_{x(T)}^j(x,v,t;u)=\exp \lc C_j (\tau; u) + D_j (\tau; u)v + i  u x \rc.
 \end{align*}
-We insert the ansatz (the guessed solution) (8) into (6) and (7) using the shorthands
+We substitute in the ansatz (the guessed solution) (8) into equation (6) and equation (7) using the shorthands
 $C_j (\tau; u):=C_j$ and $D_j (\tau; u)=D_j$ yielding the PDE:
 \begin{align*}
     0&=-\frac{\partial \Psi_j}{\partial \tau}+(r+u_jv)\frac{\partial \Psi_j}{\partial x}+
     \frac{1}{2}v\frac{\partial^2 \Psi_j}{\partial x^2}+\rho\sigma v \frac{\partial^2 \Psi_j}{\partial v \partial x}+
     \frac{1}{2}\sigma^2v \frac{\partial^2 \Psi_j}{\partial v^2}+(a-b_j v) \frac{\partial \Psi_j}{\partial v}\\
-    &\overset{\dagger}{=}-\left( \frac{\partial  C_j}{\partial \tau}+ \frac{\partial D_j}{\partial \tau}v\right)\Psi_j +(r+u_jv)(iu) \Psi_j\\&\quad+ \frac{1}{2}v(iu)^2\Psi_j+\rho\sigma v(D_j)(iu)\Psi_j+
+    &\overset{\dagger}{=}-\left( \frac{\partial  C_j}{\partial \tau}+ \frac{\partial D_j}{\partial \tau}v\right)\Psi_j +(r+u_jv)(iu) \Psi_j\\&\quad+ \frac{1}{2}(iu)^2\Psi_j+\rho\sigma v(D_j)(iu)\Psi_j+
     \frac{1}{2}\sigma^2v (D_j)^2\Psi_j+(a-b_j v)( D_j)\Psi_j\\
     &\overset{\dagger\dagger}{=} \Psi_j \lc \underbrace{ -\frac{\partial C_j}{\partial \tau} +aD_j+rui}_{(*)} \rc + \Psi_j v \lc\underbrace{ -\frac{\partial D_j}{\partial \tau}+u_jui-\frac{1}{2}u^2+\rho\sigma u i D_j+\frac{1}{2}\sigma^2 D_j^2 - b_jD_j}_{(**)} \rc,
 \end{align*}
@@ -150,9 +174,10 @@ $\dagger \dagger$ from the fact that $i^2= (\sqrt{-1})^2=-1$ and thus
 $(iu)^2=(-1 )\cdot u^2=-u^2$.
 \subsection{Transforming the PDE to a system of ODEs and solving it}
 $\textcolor{blue}{\star}$ The PDE that we derived in Subsection 1.1 is satisfied if and only if both
-ordinary differential equations $(*)$ and $(**)$ equal $0$ for all $x,v)\in (0,\infty)$. Consequently, the
+ordinary differential equations $(*)$ and $(**)$ equal $0$ for all $(x,v)\in \RR
+\times (0,\infty)$. Consequently, the
 two ordinary differential equations from $(*)$ and $(**)$ can be solved
-seperately. The system of two ordinary differential equations is then found by dropping
+seperately. i.e a system of two ODE's. The system of two ordinary differential equations is then found by dropping
 $\Psi_j$-terms, rewriting and thus given by $(*)$:
 \begin{align*}
     0&=-\frac{\partial C_j}{\partial \tau}+aD_j+rui\\&\iff \\ \frac{\partial C_j}{\partial \tau}&=aD_j+rui,
@@ -166,17 +191,24 @@ zero-initial conditions, i.e such that $D_j(0;u)=0$ and $C_j(0;u) =0$. This is
 because when the expiry is reached ($\tau = 0$), the value of $x_T = \log S_T$ is
 established, eliminating the expectation in the equality:
 \begin{align*}
-    \Psi_j&=\EE^{\PP_j} \left [ e^{iux}  \mid x(t)=x,v(t)=v \right]\\
+    \Psi_j&:=\EE^{\PP_j} \left [ e^{iux}  \mid x(t)=x,v(t)=v \right]\\
     &=\exp \lc C_j (\tau; u) + D_j (\tau; u) \cdot v + i  u x \rc \quad j=1,2.
 \end{align*}
 As a result, the second equality has to simplifiy to $e^{iu x}$ as the
-expectation vanishes at $\tau=0$. This leads to
-the conclusion that the initial conditions at expiry for $D_j (0,\phi) = 0$
-and $C_j (0,\phi) = 0$. The equation denoted by (**) outlines a Riccati equation
+expectation vanishes at $\tau=0$:
+\begin{align*}
+    \Psi_{x_{(T)}}^j(x,v,0;u)&=e^{iux}\\
+    &\Rightarrow\\
+    \exp \lc C_j (0; u) + D_j (0; u) \cdot v + i  u x \rc&=e^{iux}\\
+    &\iff\\
+    C_j (0; u) + D_j (0; u) \cdot v &=0
+\end{align*}
+This leads to the conclusion that the sufficient initial conditions at $\tau=0$ are $D_j (0,u) = 0$
+and $C_j (0,u) = 0$. The equation denoted by (**) outlines a Riccati equation
 in $D_j$ that, importantly, does not depend on $C_j$, while the
 equation marked by (*) represents an ordinary differential equation for $C_j$.
 This ordinary differential equation can be readily solved through direct
-integration after determining $D_j$.
+integration of $D_j$ after determining $D_j$.
 
 $\textcolor{blue}{\star}$ We now proceed to solving the Riccati equation as of
 the beforementioned reasons, i.e that it contains terms involving only the
@@ -214,18 +246,18 @@ yields:
     &\iff\\
     - \frac{\partial^2 E_j}{\partial \tau^2}E_j &= \alpha \frac{1}{2} \sigma^2 E_j^2 + \beta \frac{\partial E_j}{\partial \tau}E_j\\
     &\iff\\
-    - \frac{\partial^2 E_j}{\partial \tau^2} &= \alpha \frac{1}{2} \sigma^2 E_j + \beta \frac{\partial E_j}{\partial \tau}E_j\\
+    - \frac{\partial^2 E_j}{\partial \tau^2} &= \alpha \frac{1}{2} \sigma^2 E_j + \beta \frac{\partial E_j}{\partial \tau}\\
     &\iff\\
-    \frac{\partial^2 E_j}{\partial \tau^2}+\alpha \frac{1}{2} \sigma^2 E_j + \beta \frac{\partial E_j}{\partial \tau}E_j&=0\\
+    \frac{\partial^2 E_j}{\partial \tau^2}+\alpha \frac{1}{2} \sigma^2 E_j + \beta \frac{\partial E_j}{\partial \tau}&=0\\
     &\overset{\dagger}{\iff}\\
     \frac{\partial^2 E_j}{\partial \tau^2} - (\rho u \sigma i - b_j) \frac{\partial E_j}{\partial \tau} + \frac{\sigma^2}{2} \left( -\frac{1}{2}u^2 + u_j ui \right) E_j &= 0,
 \end{align*}
 where $\dagger$ follows from $\alpha = u_j ui - \frac{1}{2}u^2$ and
-$\beta=b_j-\rho \sigma u i$.
+$\beta=b_j-\rho \sigma u i$ and rearranging.
 
-$\textcolor{blue}{\star}$  We showed the initial condition for $\tau=0$ was
+$\textcolor{blue}{\star}$  We showed the initial sufficient condition for $\tau=0$ was
 specified as
-$D_j(0;u)=0$. We exploit this to show that the respective conditions for $E_j$ are
+$D_j(0;u)=0$. We exploit this to show that the respective sufficient conditions for $E_j$ are
 given by:
 \begin{align*}
     D_j(0;u)=-\frac{\left. \frac{\partial E_j(\tau;u)}{\partial \tau}\right|_{\tau=0}}{\frac{1}{2}\sigma^2E_j(0;u)}&=0\\
@@ -238,9 +270,10 @@ Using this result and that we just showed the resulting ODE for $E_j$ we now hav
     &\iff\\
     \left ( \left. \frac{\partial^2 E_j(\tau;u)}{\partial \tau^2}\right|_{\tau=0} \right ) + \frac{\sigma^2}{2} \left( -\frac{1}{2}u^2 + u_j ui \right) E_j(0;u) &= 0\\
     &\iff\\
-    -\frac{2}{\sigma^2}\frac{\left.\frac{\partial^2 E_j(\tau;u)}{\partial \tau^2}\right|_{\tau=0}}{\left( -\frac{1}{2}u^2 + u_j ui \right)}&=E_j(0;u).
+    -\frac{2}{\sigma^2}\frac{\left.\frac{\partial^2 E_j(\tau;u)}{\partial \tau^2}\right|_{\tau=0}}{\left( -\frac{1}{2}u^2 + u_j ui \right)}&=E_j(0;u)\\
+    &\neq 0,
 \end{align*}
-yielding the condition for $E_j$ at $\tau=0$ (i.e expiry).
+yielding the respective sufficient condition for $E_j$ at $\tau=0$.
 
 $\textcolor{blue}{\star}$ For $\tau=0$, we achieve the following form of
 equation (10):
@@ -256,14 +289,14 @@ said derivative:
 \begin{align*}
     \frac{\partial E_j(\tau;u)}{\partial \tau}=x_{j,+}A_je^{x_{j,+}\cdot\tau}+x_{j,-}B_je^{x_{j,-}\cdot\tau}.
 \end{align*}
-This now yields the initial condition of the derivative of $E_j$:
+This now yields the sufficient initial condition of the derivative of $E_j$:
 \begin{align*}
     \left. \frac{\partial E_j(\tau;u)}{\partial \tau} \right|_{\tau=0}&=x_{j,+}A_je^{x_{j,+}\cdot 0}+x_{j,-}B_j e^{x_{j,-}\cdot 0}\\
     &=x_{j,+} \cdot 1 \cdot A_j+x_{j,-} \cdot 1 \cdot B_j \\
-    &=x_{j,+} A_j+x_{j,-} B_j
+    &=x_{j,+} A_j+x_{j,-} B_j.
 \end{align*}
 
-$\textcolor{blue}{\star}$ Once again, we use the initial conditions for $D_j$,
+$\textcolor{blue}{\star}$ Once again, we use the sufficient initial conditions for $D_j$,
 namely, $D_j(0;u)=0$, for $\tau=0$. For equation (9) to hold, it must then be the case
 that:
 \begin{align*}
@@ -307,14 +340,16 @@ $\textcolor{blue}{\star}$ We use the found relations for $A_j,B_j$ to find:
     &=\frac{E_j(0;u)}{g_j-1}\left (x_{j,+}g_je^{x_{j,+}\cdot \tau} -x_{j,-}e^{x_{j,-}\cdot \tau}\right ).
 \end{align*}
 
-$\textcolor{blue}{\star}$ Substituting $E_j$ and $(\partial E_j)/(\partial
-\tau)$ into equation (9) for $D_j$
+$\textcolor{blue}{\star}$ Substituting $E_j$ and $\partial E_j/\partial
+\tau$ into equation (9) for $D_j$
 now yields the altered expression:
 \begin{align*}
     D_j(\tau;u)&=-\frac{\frac{\partial E_j(\tau;u)}{\partial \tau}}{\frac{1}{2}\sigma^2E_j(\tau;u)}\\
     &=-\frac{\frac{E_j(0;u)}{g_j-1}\left (x_{j,+}g_je^{x_{j,+}\cdot \tau} -x_{j,-}e^{x_{j,-}\cdot \tau}\right )}{\frac{1}{2}\sigma^2 \frac{E_j(0;u)}{g_j-1}\left ( g_je^{x_{j,+}\cdot \tau}-e^{x_{j,-}\cdot \tau}\right )}
 \end{align*}
-Now, substituting in equation (11) and (15) into the altered equation (9) yields:
+\newpage
+Now, substituting in equation (11) and (15) into the altered equation (9) using
+$\exp\lc\rc$ for readability yields:
 \begin{align*}
     D_j(\tau ; u)&=-\frac{\frac{E_j(0 ; u)}{g_j-1}\left(x_{j,+} g_j \exp\left\{x_{j,+} \cdot \tau\right\}-x_{j,-} \exp\left\{x_{j,-} \cdot \tau\right\}\right)}{\frac{\sigma^2}{2} \frac{E_j(0;u)}{g_j-1}\left(g_j \exp\left\{x_{j,+} \cdot \tau\right\}-\exp\left\{x_{j,-} \cdot \tau\right\}\right)} \\
     & =-\frac{\frac{E_j(0 ; u)}{g_j-1}\left(\frac{\rho \sigma u i-b_j+d_j}{2} g_j \exp\left\{\frac{\rho \sigma u i-b_j+d_j}{2} \tau\right\}-\frac{\rho \sigma u i-b_j-d_j}{2} \exp\left\{\frac{\rho \sigma u i-b_j-d_j}{2} \tau\right\}\right)}{\frac{\sigma^2}{2} \frac{E_j(0 ; u)}{g_j-1}\left(g_j \exp\left\{\frac{\rho \sigma u i-b_j+d_j}{2} \tau\right\}-\exp\left\{\frac{\rho \sigma u i-b_j-d_j}{2} \tau\right\}\right)} \\
@@ -332,20 +367,20 @@ Now, substituting in equation (11) and (15) into the altered equation (9) yields
 where $\dagger$ follows by multiplication of $\exp{\left \{\frac{d_j}{2}\tau
 \right \}}$, $\dagger\dagger$ from $g:=x_{j,-}/x_{j,+}$ and
 $\dagger\dagger\dagger$ by multiplication of $-1$.
-
+\newpage
 $\textcolor{blue}{\star}$  As stated at the very start, finding the solution of
 $D_j$ is advantageous to derive the solution for $C_j$ as the ODE for $C_j$ was
-given by $(*)$ containing $D_j$ and yielding by integration:
+given by $(*)$ containing $D_j$. So, by integration:
 \begin{align*}
     \frac{\partial C_j}{\partial \tau}&=rui+aD_j\\
     &\iff\\
     C_j&=\int_0^\tau rui+aD_j(s;u)\:ds\\
-    &=rui\int_0^\tau \:ds+a\int_0^\tau D_j(s;u)\:ds\\
-    &=rui\lc \tau-0\rc+a\int_0^\tau D_j(s;u)\:ds\\
+    &\overset{\dagger}{=}rui\int_0^\tau \:ds+a\int_0^\tau D_j(s;u)\:ds\\
+    &=rui \left ( \tau-0 \right )+a\int_0^\tau D_j(s;u)\:ds\\
     &=rui\tau+a\int_0^\tau D_j(s;u)\:ds.
 \end{align*}
-As we wanted by solving the ODE of $D_j$ first we only have to find the integral
-involving $D_j$. We proceed with finding the integral involving $D_j$:
+where $\dagger$ follows from the linearity of the integral. As wished, solving the ODE of $D_j$ first, we now only have to find the integral
+involving $D_j$ to find the solution of $C_j$. We proceed with finding the integral involving $D_j$:
 \begin{align*}
     \int_0^\tau D_j(s;u)\:ds&\overset{\dagger}{=}\int_0^\tau \frac{b_j-\rho \sigma u i + d_j}{\sigma^2} \frac{1-\exp\left\{d_j \tau\right\}}{1-g_j \exp\left\{d_j \tau\right\}} \:ds\\
     &= \frac{b_j-\rho \sigma u i + d_j}{\sigma^2}\cdot \int_0^\tau\frac{1-\exp\left\{d_j \tau\right\}}{1-g_j \exp\left\{d_j \tau\right\}} \:ds\\
@@ -363,29 +398,31 @@ $\dagger\dagger$ from substition using:
 \begin{align*}
     y=\exp\left\{d_j s\right\}, \quad dy=d_j\exp\left\{d_j s\right\}ds,\quad ds=\frac{dy}{d_j y},
 \end{align*}
-and the fact that when at $\tau \Rightarrow \exp\left\{d_j \tau\right\}$ and at
-zero $\Rightarrow \exp\left\{d_j 0 \right\}=1$. Lastly, $\dagger\dagger\dagger$ follows from:
+and the fact that when at $\tau \Rightarrow \exp\left\{d_j \tau\right\}=\exp\left\{d_j \tau\right\}$ and at
+zero $\Rightarrow \exp\left\{d_j \cdot 0 \right\}=1$. Lastly,
+$\dagger\dagger\dagger$ follows from:
 \begin{align*}
     \frac{d}{dy}\frac{1-g_j}{g_j}\log{(1-g_j y)}&=\frac{1}{1-g_jy}\frac{1-g_j}{g_j}(-g_j)\\
     &=-\frac{1-g_j}{1-g_jy}\\
     &\Rightarrow\\
-    -\int\frac{1-g_j}{1-g_jy}\:dy&=\frac{1-g_j}{g_j}\log{(1-g_jy)}(+C).
+    -\int\frac{1-g_j}{1-g_jy}\:dy&=\frac{1-g_j}{g_j}\log{(1-g_jy)}+K, \quad K\in \RR.
 \end{align*}
-\newpage
-We are not quite done as we still need to substitute the found integral back
+where in our case the integral is definite and hence no constant $K$ added. We are not quite done as we still need to substitute the found integral back
 into the expression for $C_j$:
-\begin{align*}
-    C_j&=rui\tau+a\int_0^\tau D_j(s;u)\:ds.\\
-    & =rui\tau+a \frac{b_j-\rho \sigma u i+d_j}{\sigma^2} \cdot\frac{1}{d_j}\left(d_j \tau+\frac{1-g_j}{g_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
-    & =rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau+\frac{1}{d_j}\left(b_j-\rho \sigma u i+d_j\right) \frac{1-g_j}{g_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
-    & \overset{\dagger}{=}rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau+\frac{1}{d_j}\left(b_j-\rho \sigma u i+d_j\right) \frac{\rho-\frac{\rho \sigma u i-b_j-d_j}{\rho \sigma u i-b_j+d_j}}{\left.\frac{\rho \sigma u i-b_j-d_j}{\rho \sigma u i-b_j+d_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right)}\right. \\
-    &=rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau+\frac{1}{d_j}\left(b_j-\rho \sigma u i+d_j\right) \frac{\left(\rho \sigma u i-b_j+d_j\right)-\left(\rho \sigma u i-b_j-d_j\right)}{\rho \sigma u i-b_j-d_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
-    & =rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau+\frac{1}{d_j}\left(b_j-\rho \sigma u i+d_j\right) \frac{2 d_j}{\rho \sigma u i-b_j-d_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
-    & =rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau-\frac{1}{d_j} 2 d_j \frac{\rho \sigma u i-b_j-d_j}{\rho \sigma u i-b_j-d_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
-    &=rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau-2 \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right),
-\end{align*}
-
-where $\dagger$ follows from the definition of $g_j=x_{j,-}/x_{j,+}$.
+\begin{equation*}
+    \hspace*{-1.4cm}
+    \begin{aligned}
+        C_j&=rui\tau+a\int_0^\tau D_j(s;u)\:ds.\\
+        & =rui\tau+a \frac{b_j-\rho \sigma u i+d_j}{\sigma^2} \frac{1}{d_j}\cdot\left(d_j \tau+\frac{1-g_j}{g_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
+        & =rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau+\frac{1}{d_j}\left(b_j-\rho \sigma u i+d_j\right) \frac{1-g_j}{g_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
+        & \overset{\dagger}{=}rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau+\frac{1}{d_j}\left(b_j-\rho \sigma u i+d_j\right) \frac{1-\frac{\rho \sigma u i-b_j-d_j}{\rho \sigma u i-b_j+d_j}}{\frac{\rho \sigma u i-b_j-d_j}{\rho \sigma u i-b_j+d_j} }\log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
+        &=rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau+\frac{1}{d_j}\left(b_j-\rho \sigma u i+d_j\right) \frac{\left(\rho \sigma u i-b_j+d_j\right)-\left(\rho \sigma u i-b_j-d_j\right)}{\rho \sigma u i-b_j-d_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
+        & =rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau+\frac{1}{d_j}\left(b_j-\rho \sigma u i+d_j\right) \frac{2 d_j}{\rho \sigma u i-b_j-d_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
+        & =rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau-\frac{1}{d_j} 2 d_j \frac{\rho \sigma u i-b_j-d_j}{\rho \sigma u i-b_j-d_j} \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right) \\
+        &=rui\tau+\frac{a}{\sigma^2}\cdot\left(\left(b_j-\rho \sigma u i+d_j\right) \tau-2 \log \left(\frac{1-g_j \exp\left\{d_j \tau\right\}}{1-g_j}\right)\right),
+    \end{aligned}
+\end{equation*}
+where $\dagger$ follows from $g_j:=x_{j,-}/x_{j,+}$.
 \newpage
 \subsection{Numerical implementation of characteristic functions
 }
@@ -394,7 +431,7 @@ $\textcolor{blue}{\star}$ All the code can be viewed in \autoref{chap:code}.
 $\textcolor{blue}{\star}$ From \cite{Havrylenko2024}, pp. 59-65 we define a
 function to compute the characteristic functions $\Psi_j$, $j=1,2$, given by:
 \begin{align*}
-    \Psi_{x(T)}^j(x,v,t;u)=\exp \lc C_j (\tau; u) + D_j (\tau; u) \cdot v + i  u x \rc,
+    \Psi_{x(T)}^j(x,v,\tau ;u)=\exp \lc C_j (\tau; u) + D_j (\tau; u) \cdot v + i  u x \rc,
 \end{align*}
 with:
 \begin{align*}
@@ -404,7 +441,11 @@ with:
     d_j &= \sqrt{(\rho\sigma ui - b_j)^2 - \sigma^2(2u_jui - u^2)},\\
     u_1 &= \frac{1}{2}, \quad u_2 = -\frac{1}{2}, \quad a = \kappa\theta, \quad b_1 = \kappa + \lambda - \rho\sigma, \quad b_2 = \kappa + \lambda,
 \end{align*}
-that takes parameters seen in Table 1 with given specific values.
+that takes parameters seen in Table 1 with given specific values. We define the
+function in \texttt{Python} as \texttt{characteristicFunctionHeston}. All the
+requirements are met with the function parameter \texttt{j} to choose which
+characteristic function to compute (and draw corresponding
+$C_j,\:D_j,\:g_j,\:d_j$ and $u,b$ formulas from the chosen \texttt{j}).
 \begin{table}[!h]
     \centering
     \begin{tabular}{lll}
@@ -415,14 +456,14 @@ that takes parameters seen in Table 1 with given specific values.
     Current Variance & $v_t$ & 0.06 \\
     Risk-free Interest Rate & $r$ & 0.05 \\
     Speed of Mean Reversion & $\kappa$ & 1 \\
-    Long-term Mean Variance & $\theta$ & 0.06 \\
+    Long-term Mean of Variance & $\theta$ & 0.06 \\
     Volatility of the Volatility & $\sigma$ & 0.3 \\
     Correlation Coefficient & $\rho$ & -0.5 \\
     Market Price of Risk & $\lambda$ & 0.01 \\
     Time to Expiry & $\tau$ & 1 \\
     \bottomrule
     \end{tabular}
-    \caption{Parameters for Computing Characteristic Functions $\Psi_1$, $\Psi_2$.}
+    \caption{Parameters for computing the characteristic functions $\Psi_1$, $\Psi_2$.}
     \label{table:characteristic_functions}
 \end{table}
 
@@ -430,6 +471,7 @@ that takes parameters seen in Table 1 with given specific values.
 The plot seen in Figure 1 is of the real and imaginary part of
 $\Psi_j$, $j=1,2$ computed using the above defined function in \texttt{Python}.
 The pattern for the real and imaginary part is seen, as oscillating with peaks
+(maximum amplitudes)
 around the middle of the interval
 for $u\in [-20,20]$, i.e near $u \approx 0$, and lower amplitude oscillations around the
 ends, i.e near $u\approx \pm 20$. More specifically, we see that the real part
@@ -437,28 +479,27 @@ of the characteristic functions is even but the imaginary part is odd. The graph
 of $\mathfrak{Im}(\Psi_j)$ has odd symmetry, meaning it has a rotational
 symmetry about the origin, and the graph of $\mathfrak{Re}(\Psi_j)$ has even
 symmetry, meaning it has symmetry about the second axis - although it requires
-some \textit{imagination} as the second axis is not centered.
+some \textit{imagination} to see said symmetry as the second axis is not centered.
 \begin{figure}[!h]
-    \begin{adjustwidth}{-2cm}{-2cm}  % Adjust these values as needed
+    \begin{adjustwidth}{-2cm}{-2cm}  
       \centering
-      \includegraphics[width=1\linewidth]{1.3.png} % You can adjust this width as needed
+      \includegraphics[width=1\linewidth]{1.3.png} 
       \label{Figure 1}
     \end{adjustwidth}
-    \captionsetup{skip=-25pt} % Adjust the space between the figure and the caption
-    \caption{Real and imaginary part of $\Psi_j$, $j=1,2$ for $u\in [-20,20]$
-    computed using the \texttt{characteristicFunctionHeston} function in
-    \texttt{Python} with code avaliable in \autoref{chap:code}.}
+    \captionsetup{skip=-20pt}
+    \caption{Real and imaginary part of $\Psi_j$, $j=1,2$ for $u\in [-20,20]$.}
 \end{figure}
 
 \newpage
 \section{Option pricing in the context of the Heston model}
 We will report results with five significant figures throughout this section of
-the HandIn. When references are given to (x.y) (for example 2.1) it is to be understood as
-subsection (x.y) (subsection 2.1) unless otherwise stated.
+the HandIn. Computation times will be recorded in \textit{seconds (s)}. When
+references are given to (x.y) (for example 2.1) it is to be understood as
+Subsection (x.y) (subsection 2.1) unless otherwise stated.
 \subsection{Monte Carlo and Euler discretization Scheme}
 $\textcolor{blue}{\star}$ All the code can be viewed in \autoref{chap:code}.
 
-$\textcolor{blue}{\star}$ We simulate $S_t$ over the time interval $[0, T]$ (to
+$\textcolor{blue}{\star}$ We simulate $S_t$ and $v_t$ under $\tilde{\QQ}$ over the time interval $[0, T]$ (to
 and including expiry),
 which we assume to be discretized as $0 = t_1 < t_2 < \ldots < t_m = T$, where
 the time increments are equally spaced with width $d t$. For $n\in\NN$ we use
@@ -466,33 +507,47 @@ the Euler discretization on an equidistan time grid $\lc t_i=\frac{iT}{n}\mid
 i=0,\ldots,n\rc$, where $n$ is the number of time points after $t=0$. From
 \cite{Rouah2024}, p. 4 we start with the initial
 values $S_0$ for the stock price and $v_0$ for the variance. Given a value for
-$v_t$ at time $t$, we first obtain the discretization of $v_t$ by $v_{t+dt}$ from:
+$v_t$ at time $t$ (remember $t_1=0$), we first obtain the discretization of $v_t$ by $v_{t+dt}$ from:
 \begin{align*}
-    v_{t+dt} = v_t + \kappa(\theta - v_t)dt + \sigma \sqrt{v_t dt}Z_v,
+    v_{t+dt} = v_t + \kappa(\theta - v_t)dt + \sigma \sqrt{v_t dt}Z_v^\PP,
 \end{align*}
 and we obtain the discretization of $S_t$ by $S_{t+dt}$ from:
 \begin{align*}
-    S_{t+dt} = S_t + rS_tdt + \sqrt{v_t dt}S_tZ_s,
+    S_{t+dt} = S_t + rS_tdt + \sqrt{v_t dt}S_tZ_s^\PP,
 \end{align*}
-where to generate $Z_v$ and $Z_s$ with correlation $\rho$, we first generate two independent standard normal variables $Z_1$ and $Z_2$, and set $Z_v = Z_1$ and $Z_s = \rho Z_1 + \sqrt{1 - \rho^2} Z_2$.
-For an arbitrary but fixed $\lambda$ (i.e no estimation of $\lambda$ needed) we use the adjusments:
+where to generate $Z_v^\PP$ and $Z_s^\PP$ with correlation $\rho$, we first generate two
+independent standard normal variables $Z_1^\PP$ and $Z_2^\PP$, and set $Z_v^\PP = Z_1^\PP$ and
+$Z_s^\PP = \rho Z_1^\PP + \sqrt{1 - \rho^2} Z_2^\PP$ by Cholesky decomposition
+\cite{Havrylenko2024}, p. 43.
+
+For an arbitrary but fixed $\lambda$ (i.e no estimation of $\lambda$ needed) we
+follow as suggested by \cite{heston1993closed} (see \cite{Havrylenko2024}, p.
+45) the adjusments that preserve the structure $v$ in the Heston model as we
+want to preform a change of measure from $\PP$ to $\tilde{\QQ}$ corresponding to
+$\lambda$:
 \begin{align*}
     \tilde{\kappa}=\kappa+\lambda \quad \text{ and } \quad \tilde{\theta}=\frac{\kappa\theta}{\kappa + \lambda},
 \end{align*}
 and thus:
 \begin{align*}
-    v_{t+dt} = v_t +\tilde{\kappa}(\tilde{\theta} - v_t)dt + \sigma \sqrt{v_t dt}Z_v,
+    S_{t+dt} &= S_t + rS_tdt + \sqrt{v_t dt}S_tZ_s^{\tilde{\QQ}},\\
+    v_{t+dt} &= v_t +\tilde{\kappa}(\tilde{\theta} - v_t)dt + \sigma \sqrt{v_t dt}Z_v^{\tilde{\QQ}},
 \end{align*}
-yielding that the price under the equivalent martingale measure
-$\tilde{\QQ}(\lambda)$ is unique, i.e choosing a different arbitrary
-$\lambda_1\neq \lambda$ would yield another equivalent martingale measure
-$\tilde{\QQ}(\lambda_1)$ among the infinite number of measures.
+yielding that we simulate under the equivalent Martingale measure
+$\tilde{\QQ}(\lambda)$ for that one path, i.e choosing a different arbitrary
+$\lambda^\star \neq \lambda$ would yield another equivalent Martingale measure
+$\tilde{\QQ}(\lambda^\star)$ corresponding to $\lambda^\star$. This leads
+to analytically tractable results for option pricing.
 
 Lastly, we note that there might occure negative $v$-values at some of the time
-points due to discretization errors even if the Feller condition is met (see
+points due to discretization errors \textbf{even} if the Feller condition is met (see
 \cite{Havrylenko2024}, p. 28). When this occurs we use a full truncation
 scheme, namely, $\max\lc 0,v_t\rc$ but firstly count it towards
-our zero-variance-count for later reporting.
+our 0-Variance-Count for later reporting. In the code we actually simply
+check using a \texttt{if}-statement if the variance at time $t_i$ is less than
+or equal to $0$ - if not - its counted and then forced to 0.
+The function \texttt{generateHestonPathEulerDisc} implements the beforementioned
+theory as wished in the HandIn \#3 description.
 \newpage
 The simulation in \texttt{Python} is done with the parameters seen in Table 2.
 \begin{table}[!h]
@@ -505,7 +560,7 @@ The simulation in \texttt{Python} is done with the parameters seen in Table 2.
     Initial Variance & $v_0$ & 0.06 \\
     Risk-free Interest Rate & $r$ & 0.05 \\
     Speed of Mean Reversion & $\kappa$ & 1 \\
-    Long-term Mean Variance & $\theta$ & 0.06 \\
+    Long-term Mean of Variance & $\theta$ & 0.06 \\
     Volatility of the Volatility & $\sigma$ & 0.3 \\
     Correlation Coefficient & $\rho$ & -0.5 \\
     Market Price of Risk & $\lambda$ & 0.01 \\
@@ -515,12 +570,18 @@ The simulation in \texttt{Python} is done with the parameters seen in Table 2.
     Number of Paths & $N$ & 1000 \\
     \bottomrule
     \end{tabular}
-    \caption{Simulation and model parameters for the Heston model to calculate the European call option price Monte Carlo and Euler discretization scheme.}
+    \caption{Simulation and model parameters for the Heston model to calculate the European call option price using the Monte Carlo and Euler discretization scheme.}
     \label{table:call_option_pricing_parameters1}
     \end{table}
 
-The results from simulation in \texttt{Python} for three different seeds
-(\texttt{np.random.seed()}) is seen in Table 3.
+The results from simulation using the pricing-function \texttt{priceHestonCallViaEulerMC} for three different seeds
+(\texttt{np.random.seed()}) is seen in Table 3. We use the
+\texttt{generateHestonPathEulerDisc}-function to simulate $N$ paths and then
+estimate prices of the European call option on the underlying asset $S$
+following a Heston model by discounting the mean of the payoffs of the $N$ paths as this would
+yield prices near the expectation under $\tilde{\QQ}$ corresponding to $\lambda$
+by the Law of Large
+Numbers (LLN) - as we do in Monte Carlo estimates.
 
 \begin{table}[ht]
     \centering
@@ -528,9 +589,9 @@ The results from simulation in \texttt{Python} for three different seeds
     \hline
     \multicolumn{4}{|c|}{\textbf{Euler Monte Carlo}} \\ \hline
     \textbf{}  & \textbf{Seed A} & \textbf{Seed B} & \textbf{Seed C} \\ \hline
-    \textbf{Option Price} & 12.247 & 11.849 & 11.781 \\
-    \textbf{Standard Deviation} & 0.51792 & 0.51211 & 0.52947 \\
-    \textbf{Computing Time} & 0.70570 & 0.61735 & 0.70212 \\
+    \textbf{Option Price} & 12.247 & 11.849 & 11.781 \\ \hline
+    \textbf{Standard Deviation} & 0.51792 & 0.51211 & 0.52947 \\ \hline
+    \textbf{Computing Time} & 0.70570 & 0.61735 & 0.70212 \\ \hline
     \textbf{0-Variance-Count} & 52 & 47 & 36 \\ \hline
     \end{tabular}
     \caption{Simulation results using Euler Monte Carlo discretization for seeds $\text{\textbf{A}}=1$, $\text{\textbf{B}}=10$ and $\text{\textbf{C}}=100$.}
@@ -538,8 +599,10 @@ The results from simulation in \texttt{Python} for three different seeds
 \end{table}
 
 
+
 Observe that the option price depends upon the seed-number which implies that the
-Monte Carlo, and specifically Euler discretization, scheme might not be precise enough.
+Monte Carlo, and specifically Euler discretization, scheme might not be precise
+enough for actual option pricing.
 Furthermore, we kept the number of simulations fixed, as requested. If this
 constraint was lifted and simulation was done at a higher number of paths the
 results for every seed would differ as well. These findings for Monte Carlo
@@ -551,23 +614,33 @@ $\textcolor{blue}{\star}$ All the code can be viewed in \autoref{chap:code}.
 
 $\textcolor{blue}{\star}$ We refer to the logical build up for the functions
 used in 2.1 but shortly explain the implementation of Monte Carlo method but now with
-the Milstein discretization scheme. From \cite{Rouah2024}, p. 8 given a value for
+the Milstein discretization scheme. Initial values $S_0$ and $v_0$ are given. From \cite{Rouah2024}, p. 8, given a value for
 $v_t$ at time $t$, we first obtain the discretization of $v_t$ by $v_{t+dt}$ from:
 \begin{align*}
-    v_{t+dt} = v_t + \kappa(\theta - v_t)dt + \sigma \sqrt{v_tdt}Z_v+\frac{1}{4}\sigma^2dt\left (Z_v^2-1 \right ),
+    v_{t+dt} = v_t + \kappa(\theta - v_t)dt + \sigma \sqrt{v_tdt}Z_v^\PP+\frac{1}{4}\sigma^2dt\left ((Z_v{^\PP})^2-1 \right ),
 \end{align*}
 and we obtain the discretization of $S_t$ by $S_{t+dt}$ from:
 \begin{align*}
-    S_{t+dt} = S_t + rS_tdt + \sqrt{v_t dt}S_tZ_s+\frac{1}{4}S_t^2dt(Z_s^2-1 ),
+    S_{t+dt} = S_t + rS_tdt + \sqrt{v_t dt}S_tZ_s^\PP+\frac{1}{4}S_t^2dt\left ((Z_s{^\PP})^2-1 \right ),
 \end{align*}
-where to generate $Z_v$ and $Z_s$ with correlation $\rho$, we first generate two independent standard normal variables $Z_1$ and $Z_2$, and set $Z_v = Z_1$ and $Z_s = \rho Z_1 + \sqrt{1 - \rho^2} Z_2$.
-For an arbitrary but fixed $\lambda$ (i.e no estimation of $\lambda$ needed) we use the adjusments:
+where to generate $Z_v^\PP$ and $Z_s^\PP$ with correlation $\rho$, we first
+generate two independent standard normal variables $Z_1^\PP$ and $Z_2^\PP$, and
+set $Z_v^\PP = Z_1^\PP$ and $Z_s^\PP = \rho Z_1^\PP + \sqrt{1 - \rho^2} Z_2^\PP$ by
+Cholesky decomposition \cite{Havrylenko2024}, p. 43.
+
+For an arbitrary but fixed $\lambda$ (i.e no estimation of $\lambda$ needed) we
+follow as suggested by \cite{heston1993closed} (see \cite{Havrylenko2024}, p.
+45) the adjusments that preserve the structure $v$ in the Heston model as we
+want to preform a change of measure $\PP$ to $\tilde{\QQ}$ corresponding to
+$\lambda$ (as
+explained in EulerMC (2.1)):
 \begin{align*}
     \tilde{\kappa}=\kappa+\lambda \quad \text{ and } \quad \tilde{\theta}=\frac{\kappa\theta}{\kappa + \lambda},
 \end{align*}
 and thus:
 \begin{align*}
-    v_{t+dt} = v_t +\tilde{\kappa}(\tilde{\theta} - v_t)dt + \sigma \sqrt{v_tdt}Z_v+\frac{1}{4}\sigma^2dt\left (Z_v^2-1 \right ).
+    S_{t+dt} &= S_t + rS_tdt + \sqrt{v_t dt}S_tZ_s^{\tilde{\QQ}}+\frac{1}{4}S_t^2dt\left ((Z_s^{{\tilde{\QQ}}})^2-1 \right )\\
+    v_{t+dt} &= v_t +\tilde{\kappa}(\tilde{\theta} - v_t)dt + \sigma \sqrt{v_tdt}Z_v^{\tilde{\QQ}}+\frac{1}{4}\sigma^2dt\left ((Z_v^{\tilde{\QQ}})^2-1 \right ).
 \end{align*}
 The simulation in \texttt{Python} is done with the parameters seen in Table 4.
 \begin{table}[!h]
@@ -590,22 +663,25 @@ The simulation in \texttt{Python} is done with the parameters seen in Table 4.
     Number of Paths & $N$ & 1000 \\
     \bottomrule
     \end{tabular}
-    \caption{Simulation and model parameters for the Heston model to calculate the European call option price Monte Carlo and Milstein discretization scheme.}
+    \caption{Simulation and model parameters for the Heston model to calculate the European call option price using the Monte Carlo and Milstein discretization scheme.}
     \label{table:call_option_pricing_parameters2}
     \end{table}
 \newpage
 The results from simulation in \texttt{Python} for three different seeds
-(\texttt{np.random.seed()}) is seen in Table 5.
-
+(\texttt{np.random.seed()}) is seen in Table 5. The logical build up of
+\texttt{generateHestonPathMilsteinDisc} and
+\texttt{priceHestonCallViaMilsteinMC} is \textbf{exactly} thoes given in EulerMC (2.1)
+but with the different discretization scheme. We therefore spare you the
+explanation once more.
 \begin{table}[ht]
     \centering
     \begin{tabular}{|l|c|c|c|}
     \hline
     \multicolumn{4}{|c|}{\textbf{Milstein Monte Carlo}} \\ \hline
     \textbf{} & \textbf{Seed A} & \textbf{Seed B} & \textbf{Seed C} \\ \hline
-    \textbf{Option Price} & 12.253 & 11.827 & 11.778 \\
-    \textbf{Standard Deviation} & 0.51785 & 0.51029 & 0.52915 \\
-    \textbf{Computing Time} & 0.75349 & 0.78604 & 0.92265 \\
+    \textbf{Option Price} & 12.253 & 11.827 & 11.778 \\ \hline
+    \textbf{Standard Deviation} & 0.51785 & 0.51029 & 0.52915 \\ \hline
+    \textbf{Computing Time} & 0.75349 & 0.78604 & 0.92265 \\ \hline
     \textbf{0-Variance-Count} & 0 & 0 & 0 \\ \hline
     \end{tabular}
     \caption{Simulation results using Monte Carlo and Milstein discretization for seeds $\text{\textbf{A}}=1$, $\text{\textbf{B}}=10$ and $\text{\textbf{C}}=100$.}
@@ -613,35 +689,51 @@ The results from simulation in \texttt{Python} for three different seeds
 \end{table}
 
 
+
 The option prices, standard deviations and computing time are of the same ball park as the ones
-given in 2.1 (EulerMC). It should be noted that computation time is highly
-reliant on the state of your computer at that given moment and the drag on your CPU/GPU. However, note that the 0-Variance-Count is $0$ for
+given in 2.1 (EulerMC) and thus subject to the same criticism in terms of seed-
+and path-dependency. It should be noted that computation time is highly
+reliant on the state of your computer at that given moment and the drag on your
+CPU/GPU from other applications
+
+However, of much importance, note that the 0-Variance-Count is $0$ for
 all three seeds. This means that the Milstein discretization scheme seems to
 produce roughly the same issues as the Euler discretization with the important
 difference of producing far fewer (here, none) instances of a variance having to
-be truncated. These findings for Monte Carlo
+be truncated to 0. These findings for Monte Carlo
 follow as given by
-\cite{Havrylenko2024}, p. 73 and the observation for the 0-Variance-count is
-exactly as mentioned by \cite{Rouah2024}, p. 7. The reason for this difference
+\cite{Havrylenko2024}, p. 73 and the observation for the 0-Variance-Count is
+exactly as mentioned by \cite{Rouah2024}, p. 7. 
+
+The reason for the difference in $0$-Variance-Count
 is that the key to the Milstein Scheme is that the accuracy of the
-discretization is increased by considering expansion of specifically $\mu_t=\mu(v_t)$ and
-$\sigma_t=\sigma(v_t)$ by Ito's lemma. This adds the correction which differs
+discretization is increased by considering expansion of both $\mu_t=\mu(S_t)$ and
+$\sigma_t=\sigma(S_t)$ and - specifically -  $\mu_t=\mu(v_t)$ and
+$\sigma_t=\sigma(v_t)$ by Ito's lemma. This expansion of $\mu_t=\mu(v_t)$ and
+$\sigma_t=\sigma(v_t)$ adds a correction-term which differs
 from EulerMC (2.1):
 \begin{align*}
-    v_{t+dt} = v_t +\tilde{\kappa}(\tilde{\theta} - v_t)dt + \sigma \sqrt{v_tdt}Z_v\underbrace{+\frac{1}{4}\sigma^2dt\left (Z_v^2-1 \right )}_{\text{correction}}.
+    v_{t+dt} = \underbrace{v_t +\tilde{\kappa}(\tilde{\theta} - v_t)dt + \sigma \sqrt{v_tdt}Z_v^{\tilde{\QQ}}}_{\text{EulerMC discretization scheme}}+\underbrace{\frac{1}{4}\sigma^2dt\left ((Z_v^{{\tilde{\QQ}}})^2-1 \right )}_{\text{correction}},
 \end{align*}
-However, even though no instances required truncation under these three seeds, the full
-truncation scheme must still be applied to $v_{t+dt}$ as this is not a guarantee.
+\begin{align*}
+    S_{t+dt} = \underbrace{S_t + rS_tdt + \sqrt{v_t dt}S_tZ_s^{\tilde{\QQ}}}_{\text{EulerMC discretization scheme}}+\underbrace{\frac{1}{4}S_t^2dt\left( (Z_s^{\tilde{\QQ}})^2-1 \right )}_{\text{correction}}.
+\end{align*}
+However, even though no instances required truncation of the variance to $0$ under these three seeds, the full
+truncation scheme must still be applied to $v_{t+dt}$ as this is not a
+guarantee even though one might be tempted to draw such conclusion based on the
+above simulation results. Some seeds may (and do) produce $0$-Variance-Count
+under the MilsteinMC discretization scheme.
+\newpage
 \subsection{Heston’s original formula}
 $\textcolor{blue}{\star}$ All the code can be viewed in \autoref{chap:code}.
 
 $\textcolor{blue}{\star}$ In this subsection we employ Heston's original formula
 to compute the price of the European call option on the underlying asset $S$
 following the Heston model. From \cite{Havrylenko2024}, pp. 59-66, analogous to
-(1.3), we define a function \texttt{characteristicFunctionHeston} to compute the
+Subsection (1.3), we define a function \texttt{characteristicFunctionHeston} to compute the
 characteristic functions $\Psi_j$, $j=1,2$, given by:
 \begin{align*}
-    \Psi_{x(T)}^j(x,v,t;u)=\exp \lc C_j (\tau; u) + D_j (\tau; u) \cdot v + i  u x \rc,
+    \Psi_{x(T)}^j(x,v,\tau;u)=\exp \lc C_j (\tau; u) + D_j (\tau; u) \cdot v + i  u x \rc,
 \end{align*}
 with:
 \begin{align*}
@@ -655,17 +747,18 @@ Using the characteristic function, the price of the European call option under
 $\tilde{\QQ}$ in the Heston model corresponding to $\lambda$ using Heston's
 original formula is given by \cite{Havrylenko2024}, p. 66 as:
 \begin{align*}
-    Call^{\text{OriginalFT}}(t)=S_tQ_1(\log(S(t)),v(t),t;ln(K))-Ke^{-r\tau}Q_2(\log(S(t)),v(t),t;\log(K)),
+    Call^{\text{OriginalFT}}(t)=S_tQ_1(\log(S(t)),v(t),t;\log(K))-Ke^{-r\tau}Q_2(\log(S(t)),v(t),t;\log(K)),
 \end{align*}
 where for $j=1,2$:
 \begin{align*}
-    Q_j(\log(S(t)),v(t),t;ln(K))=\frac{1}{2}+\frac{1}{\pi}\int_0^{+\infty} \mathfrak{Re} \left ( \frac{e^{-iu\log(K)}\Psi^j_{\log(S(T))}(\log(S(t)),v(t),t;u)}{iu}\right )du.
+    Q_j(\log(S(t)),v(t),t;\log(K))=\frac{1}{2}+\frac{1}{\pi}\int_0^{+\infty} \mathfrak{Re} \left ( \frac{e^{-iu\log(K)}\Psi^j_{\log(S(T))}(\log(S(t)),v(t),t;u)}{iu}\right )du.
 \end{align*}
-Note that in theory we do not need to consider the real part of the integrand
-but as we need to truncate the integral the need arises as there will be an
+In theory we do not need to consider the real part of the integral
+but as we need (:in our implementation) to truncate the integral the need arises as there will be an
 imaginary part. 
 
-Pricing of the call option is then calculated using the parameters
+\newpage
+Pricing of the call option is calculated using the parameters
 seen in
 Table 6.
 \begin{table}[!h]
@@ -678,7 +771,7 @@ Table 6.
     Initial Variance & $v_0$ & 0.06 \\
     Risk-free Interest Rate & $r$ & 0.05 \\
     Speed of Mean Reversion & $\kappa$ & 1 \\
-    Long-term Mean Variance & $\theta$ & 0.06 \\
+    Long-term Mean of Variance & $\theta$ & 0.06 \\
     Volatility of the Volatility & $\sigma$ & 0.3 \\
     Correlation Coefficient & $\rho$ & -0.5 \\
     Market Price of Risk & $\lambda$ & 0.01 \\
@@ -691,10 +784,11 @@ Table 6.
     \end{table}
 
 However, as noted in \cite{Havrylenko2024}, p. 66, computation of the above
-integrals $Q_j$, $j=1,2$, can be numerically tricky because of the imaginary
-part of $\log$ in
-$C_j$ as the imaginary part of $\log$ has a branch cut along the negative real
-axis. To overcome this obstacle and evaluate the integral numerically
+integrals in $Q_j$, $j=1,2$, can be numerically tricky because of $\log$ in
+$C_j$ as the $\log$ has a branch cut along the negative real
+axis that most numerical integration software packages has difficulty with unlike the
+root function in $d_j$ (see for example \cite{Albrecher2006LittleHeston} for
+their description of the axis of evil). To overcome this obstacle and evaluate the integral numerically
 we employ the \texttt{quad}-function. The \texttt{quad}-function in
 \texttt{Python}'s \texttt{scipy.integrate}-module \cite{2020SciPy-NMeth} performs numerical integration
 of $Q_j$, $j=1,2$ over a specified (truncated) interval  using adaptive quadrature methods
@@ -702,8 +796,7 @@ from the \texttt{QUADPACK}-library. We evaluate both integrals in increase upper
 bounds and then compare the European call price and computation time with the
 results obtained from 2.1 (EulerMC) and 2.2 (MilsteinMC).
 
-\newpage
-The results can be seen in Table 7 with different increasing upper bounds.
+The results can be seen in Table 7 with different increasing upper bounds, $u_{max}$.
 
 \begin{table}[ht]
     \centering
@@ -721,26 +814,26 @@ The results can be seen in Table 7 with different increasing upper bounds.
 \end{table}
 
 Table 7 results show that the option prices computed by Heston's original formula
-through numerical integration are rougly the same as the ones from 2.1 (EulerMC)
-and 2.2 (MilsteinMC). An important notice is with the increasing upper bound we
-seem to (at five significant figures) achieve the same option price. Furthermore
+through numerical integration are rougly the same as the ones from EulerMC (2.1)
+and MilsteinMC (2.2). An important notice is with the increasing upper bound we
+seem to (at seven significant figures) achieve the same option price. Furthermore
 this option price is not reliant on a seed. Aiming for a unique price for the
 European call option, the features of not depending on a seed and achieving a
 quickly stabilizing price as the upper bound increases are advantageous.  Both
-of these two properties were lacking in 2.1 (EulerMC)
-and 2.2 (MilsteinMC), however, do note that the call price is in the same ball
+of these two properties were lacking in EulerMC (2.1)
+and MilsteinMC (2.2), however, do note that the call price is in the same ball
 park which does mean they could be used for exotic option pricing.
 
-The major difference in Heston's original formula compared to 2.1 (EulerMC)
-and 2.2 (MilsteinMC) lies in the computating time. We see differences of up to a
-factor of $100$ between the computing times of Hestons original formula relative to 2.1 (EulerMC)
-and 2.2 (MilsteinMC). Note however the
+The major difference in Heston's original formula compared to EulerMC (2.1)
+and MilsteinMC (2.2) lies in the computating time. We see differences of up to -
+and exceeding - a
+factor of $100$ between the computing times of Heston's original formula relative to EulerMC (2.1)
+and MilsteinMC (2.2). Note however the
 computation time is indeed, and as expected, increasing in the bounds of
-integration but so would the increase in paths for 2.1 (EulerMC)
-and 2.2 (MilsteinMC). Advantagously, observe how precise Heston's original formula is
-for a relatively small upper bound and increasing the upper bound
+integration but so would the increase in paths for EulerMC (2.1)
+and MilsteinMC (2.2). Advantagously, observe how precise Heston's original formula is
+for a relatively small upper bounds and increasing the upper bound
 further seems to not effect the option price up to five significant figures.
-
 
 It should again be noted that computation time is highly
 reliant on the state of your computer at that given moment and the drag on your CPU/GPU.
@@ -751,10 +844,11 @@ $\textcolor{blue}{\star}$ All the code can be viewed in \autoref{chap:code}.
 $\textcolor{blue}{\star}$ In this subsection we employ Carr-Madan approach to
 Fourier transform pricing
 to compute the price of the European call option on the underlying asset $S$
-following the Heston model. From \cite{Havrylenko2024}, 59-66, (somehow) analogous to
+following the Heston model. From \cite{Havrylenko2024}, 59-66,
+analogous to Subsections
 (1.3) and (2.3), we have the characteristic functions $\Psi_j$, $j=1,2$, given by:
 \begin{align*}
-    \Psi_{x(T)}^j(x,v,t;u)=\exp \lc C_j (\tau; u) + D_j (\tau; u) \cdot v + i  u x \rc,
+    \Psi_{x(T)}^j(x,v,\tau;u)=\exp \lc C_j (\tau; u) + D_j (\tau; u) \cdot v + i  u x \rc,
 \end{align*}
 with:
 \begin{align*}
@@ -767,35 +861,48 @@ with:
 However, using the characteristic function the price of the European call option under
 $\tilde{\QQ}$ in the Heston model corresponding to $\lambda$ using Carr-Madan's
 Fourier transform formula is
-given on \cite{Havrylenko2024}, p. 77 by:
+given on \cite{Havrylenko2024}, p. 77 by (denoting $k:=\log K$):
 \begin{align*}
     Call^{\text{CarrMadan}}(k) = \frac{e^{-\alpha k}}{\pi} \mathfrak{Re} \left( \int_{0}^{+\infty} \frac{e^{-iu k} e^{-rT} \Psi_{x(T)}\left(u - (1 + \alpha)i\right)}{\alpha^{2} + \alpha - u^{2} + i(1 + 2\alpha)u} \, du \right).
 \end{align*}
 In other words, only one integration scheme is required in opposition to two in
-Heston's original formula (2.3). Note from \cite{Havrylenko2024}, pp. 56-57 we
+Heston's original formula (2.3) and we thus need to ensure we correctly
+transition from $\PP$ to $\tilde{\QQ}$ using the correct $\Psi_j$, $j=1,2$. So, from \cite{Havrylenko2024}, pp. 56-57 we
 see that $Q_2$ is related to the measure $\tilde{\QQ}$ whereas for $Q_1$ we change
-measure to $\QQ^S$. i.e we have that the price of a European call option can be
-writtein as (by change of numeraire):
+measure to $\QQ^S$. i.e to elaborate: we have that the price of a European call option can be
+written as (by change of numeraire):
 \begin{align*}
-    Call(t)&=e^{-r\tau} \EE^{\tilde{\QQ}}\lc S_T 1_{S_T > K} \rc - K e^{-r\tau} \mathbb{E}^{\tilde{\QQ}} \lc 1_{S_T > K} \rc
-    \\&=S_t\QQ^S(S_T>K)-Ke^{-r\tau}\tilde{\QQ}(S_T>K)\\
-    &=S_tQ_1-Ke^{-r\tau}Q_2
-\end{align*}
-The measure $\tilde{\QQ}$ uses the bond $B_t$ as the numeraire, while the measure $\QQ^S$ uses the stock price $S$.
-Resultingly, $Q_2$ is the correct function as it relatex to $\tilde{\QQ}$ and thus $\Psi_2$
-the correct characteristic function.
+    Call(t)&=e^{-r\tau}\EE \left ( (S_T-K)^+\right )\\
+    &=e^{-r\tau}\EE \left ( (S_T-K) 1_{S_T\geq K}\right )
+    \\&=e^{-r\tau} \EE^{\tilde{\QQ}} \left ( S_T 1_{S_T \geq K} \right ) - K e^{-r\tau} \EE^{\tilde{\QQ}} \left ( 1_{S_T \geq K} \right )\\
+    &=S_t\EE^{\tilde{\QQ}} \left ( \frac{S_T/S_t}{B_T/B_t} 1_{S_T \geq K}\right )-Ke^{-r\tau}\EE^{\tilde{\QQ}}\left ( 1_{S_T \geq K} \right )\\
+    &=S_t\EE^{\QQ^S} \left ( \frac{d\tilde{\QQ}}{d\QQ^S}\frac{S_T/S_t}{B_T/B_t} 1_{S_T \geq K} \right )-Ke^{-r\tau}\EE^{\tilde{\QQ}}\left ( 1_{S_T \geq K} \right )\\
+    &=S_t \EE^{\QQ^S}  \left ( 1_{S_T\geq K}\right ) - Ke^{-r\tau} \EE^{\tilde{\QQ}}\left ( 1_{S_T\geq K}\right )
+    \\&=S_t\QQ^S(S_T \geq K)-Ke^{-r\tau}\tilde{\QQ}(S_T\geq K)\\
+    &=S_t\QQ^S(\log{S_T} \geq \log{K})-Ke^{-r\tau}\tilde{\QQ}(\log{S_T} \geq \log{K})\\
+    &=S_tQ_1-Ke^{-r\tau}Q_2,
+\end{align*} 
+where $\frac{\mathrm{d}\tilde{\QQ}}{\mathrm{d}\QQ^S}$ is the Radon-Nikodym derivative given by
+$\frac{\mathrm{d}\tilde{\QQ}}{\mathrm{d}\QQ^S}=(B_T/B_t)/(S_T/S_t)$ as $\tilde{\QQ}$ uses the
+bond $B_t$ as the numeraire, while the measure $\QQ^S$ uses the stock price $S$.
+Resultingly, $Q_2$ is the correct function as it relates to $\tilde{\QQ}$ and thus $\Psi_2$
+the correct characteristic function to use in the Carr-Madan European call
+option formula. $\Psi_1$ can be used but has to be implemented differently (see
+\cite{Havrylenko2024}, p. 71).
 Consequently, when implementing the \texttt{characteristicFunctionHeston} into
 the evaluation of the integral in the Carr-Madan Fourier transform pricing
-formula for the European call option, we restrict \texttt{j=2} in the function parameter and the
-horizontal shift for the characteristic function argument to  \texttt{(u-(1+alpha)i)} as opposed to \texttt{u}.
+formula for the European call option, we restrict \texttt{j=2} in the function
+parameter. Furthermore, the
+horizontal shift for the characteristic function argument is also restricted to
+\texttt{(u-(1+alpha)i)} as opposed to \texttt{u} (see above formula for Carr-Madan).
 
-Note that in theory we do not need to consider the real part of the integrand
-but as we need to truncate the integral for numerical evaluation the need arises as there will be an
+In theory we do not need to consider the real part of the integral
+but as we need (:in our implementation) to truncate the integral for numerical evaluation the need arises as there will be an
 imaginary part. 
 
 To evaluate the integral numerically we employ the \texttt{quad}-function in
-\texttt{Python}, again (see subsection 2.4 for the same description and branch
-cuts of the imaginary part of the $\log$-function).
+\texttt{Python}, again (see subsection 2.4 for the same description of the axis
+of evil from the $\log$-function).
 
 Pricing of the call option is then calculated using the parameters seen in Table 8.
 \begin{table}[!h]
@@ -808,7 +915,7 @@ Pricing of the call option is then calculated using the parameters seen in Table
     Initial Variance & $v_0$ & 0.06 \\
     Risk-free Interest Rate & $r$ & 0.05 \\
     Speed of Mean Reversion & $\kappa$ & 1 \\
-    Long-term Mean Variance & $\theta$ & 0.06 \\
+    Long-term Mean of Variance & $\theta$ & 0.06 \\
     Volatility of the Volatility & $\sigma$ & 0.3 \\
     Correlation Coefficient & $\rho$ & -0.5 \\
     Market Price of Risk & $\lambda$ & 0.01 \\
@@ -817,12 +924,12 @@ Pricing of the call option is then calculated using the parameters seen in Table
     Damping Factor & $\alpha$ & 0.3 \\
     \bottomrule
     \end{tabular}
-    \caption{Model parameters for the Heston's model European call option pricing using Carr-Madan's Fourier transfom approach}
+    \caption{Model parameters for the Heston's model European call option pricing using Carr-Madan's Fourier transfom approach.}
     \label{table:call_option_pricing_parameters4}
 \end{table}
 
 The results can be seen in Table 9  with different increasing upper bounds and
-specifically $u=50$ as requested in the HandIn.
+specifically $u_{max}=50$ as requested in the HandIn \#3.
 \begin{table}[ht]
     \centering
     \begin{tabular}{|l|c|c|c|c|}
@@ -838,58 +945,728 @@ specifically $u=50$ as requested in the HandIn.
     \label{table:results4}
 \end{table}
 
-Firstly, observe that the results of (2.4) are almost identical as thoes of
+Firstly, observe that the results of (2.4) are almost identical to thoes of
 (2.3). We will however comment on why this might not be a general result when we
-increase the number of call option calculations.
+increase the number of call option calculations or if the computation was done
+under the same CPU/GPU-drag.
 
 If we were to price a large number of options we would expect the
-Carr-madan method (2.4) to be faster in relative terms in computing time
-compared to that of (2.3) and especially thoes of EulerMC (2.1) and MilsteinMC
+Carr-madan method (2.4) to be faster in terms of computing time
+compared to that of Heston's formula (2.3) and especially thoes of EulerMC (2.1) and MilsteinMC
 (2.2). To see why consider both call option pricing formulas for (2.3):
 \begin{align*}
-    Call^{\text{OriginalFT}}(t)=S_tQ_1(\log(S(t)),v(t),t;ln(K))-Ke^{-r\tau}Q_2(\log(S(t)),v(t),t;\log(K)),
+    Call^{\text{OriginalFT}}(t)=S_tQ_1(\log(S(t)),v(t),t;\log(K))-Ke^{-r\tau}Q_2(\log(S(t)),v(t),t;\log(K)),
 \end{align*}
-and for 2.4:
+and for (2.4) denoting $k:=\log K$:
 \begin{align*}
     Call^{\text{CarrMadan}}(k) = \frac{e^{-\alpha k}}{\pi} \mathfrak{Re} \left( \int_{0}^{+\infty} \frac{e^{-iu k} e^{-rT} \Psi_{x(T)}\left(u - (1 + \alpha)i\right)}{\alpha^{2} + \alpha - u^{2} + i(1 + 2\alpha)u} \, du \right).
 \end{align*}
 Notice that the denominator of the Carr-Madan formula (2.3) decays the integral
-relatively faster compared to that of Heston's original formula (2.4). This is
-because the integrand enters in the denominator squared in Carr-Madan formula (2.3)
+relatively faster compared to that of Heston's original formula (2.4), because the integrand enters in the denominator squared in Carr-Madan formula (2.3)
 where as it enters linearly in the denominator in Heston's original formula
 (2.4). Another obvious advantageous is the fact that we have one integration
 scheme in Carr-Madan formula (2.3) as opposed to two in Heston's original formula
-(2.4).
+(2.4) which for a larger number of options could be significant.
 
 The key difference between Carr-Madan's formula and the methods EulerMC (2.1)
-and MilsteinMC (2.2)  is the computation time, with Carr-Madan showing up to a
-$100$ times faster computation compared to (2.1) and (2.2). Despite the expected
-increase in computation time with wider integration bounds, similar to the
-increase in paths for EulerMC (2.1) and Carr-Madan's (2.2) precision remains high for small
-upper bounds without significantly affecting option prices up to five decimal
-places. Increasing the upper bound theoretically accelerates the integral's
-decay for the reasons mentioned before compared to Heston's original formula (2.3).
+and MilsteinMC (2.2)  is the computation time, with Carr-Madan's formula being
+faster by up to a factor of $100$ compared to EulerMC (2.1) and MilsteinMC (2.2). Despite the expected
+increase in computation time with wider integration bounds Carr-Madan's (2.2) precision remains high for small
+upper bounds without significantly affecting option prices by up to atleast five
+decimal points.
 
 It should again be noted as it is not negliable whatsoever that the computation time is highly
-reliant on the state of your computer at that given moment and the drag on your CPU/GPU.
+reliant on the state of your computer at that given moment and the drag on your
+CPU/GPU.
+
+In summary of question 2 we can easily conclude the following from
+experimentation (and theory):
+
+\begin{itemize}
+    \item All the methods lead to prices around the same ball park.
+    \item The Fourier transform based methods ((2.3) and (2.4)) were
+    significantly faster at computing option prices of up to and exceeding a
+    factor of 100 compared to EulerMC (2.1) and MilsteinMC (2.2).
+    \item MilsteinMC (2.2) was identical to EulerMC (2.3) with the important
+    difference of almost no occurences of 0-Variance-Count in the former method
+    because of the expansions of $\mu(v_t)$ and $\sigma(v_t)$.
+    \item EulerMC (2.1) and MilsteinMC (2.2) were both not precise enough
+    methods for option pricing based on seed- and path-dependence.
+    \item Carr-Madan (2.4) would be compared to Heston (2.3) as in the former
+    the denominator in the integral contains $u^2$ as opposed to
+    $u$ in the latter method. This could be significant for heavy computational option calculations
+    that we did not consider here. Anecdotally, Yevhen's dissertation used
+    Carr-Madan as it was the only sufficiently fast method.
+\end{itemize}
 
 \newpage
 \section{Asset allocation under the Heston model}
-\subsection{Derivation of the Hamilton-Jacobi-Bellman PD}
+\subsection{Derivation of the Hamilton-Jacobi-Bellman PDE}
+$\textcolor{blue}{\star}$ Consider the set of admissible investment strategies given by
+$\mathcal{A}(t,x,v)$. The wealth of the risk-averse investor then equals $x$ at
+time $t$ for $t\leq T$. Consequently, the value function, $\mathcal{V}$, can be
+written for any $t\in [0,T]$ as:
+\begin{align*}
+    \mathcal{V}(t,x,u)&=\max_{\pi\in \c{A}(t,x,v)} \EE \left [ U(X^\pi(T))\right ]\\
+    &=\max_{\pi\in \mathcal{A}(t,x,v)} \EE \left [ U(X^\pi(T)) \mid X^\pi(t) =x, v(t)=v\right ].
+\end{align*}
+Maximizing expected utility over $\pi \in \c{A}(t, x, v)$ simplifies when $t =
+T$, as the interval $t \in [0, T]$ simplifies to the single point $t = T$. At
+$t=T$ the expectation vanishes as the investment horizon is reached and the
+wealth and variance is thus known. This
+leads directly to the terminal condition:
+\begin{align*}
+    \mathcal{V}(T,x,u)&=\max_{\pi\in \mathcal{A}(t,x,v)} \EE \left [ U(X^\pi(T)) \mid X^\pi(T) =x, v(T)=v\right ]\\
+    &=\max_{\pi\in \c{A}(T,x,v)} \EE \left [ U(x)\right ]\\
+    &=U(x).
+\end{align*}
+$\textcolor{blue}{\star}$ We have that the dynamics for the wealth process
+$X^\pi(t + h)$ and variance $v(t + h)$ for some arbitrary constant investment strategy,
+$\pi$, is given by:
+\begin{align*}
+    dX^\pi(t + h) &= X^\pi(t + h) \left( r + \pi \bar{\lambda} v(t + h) \right) d(t + h) + X^\pi(t + h) \pi \sqrt{v(t + h)} dW^{\PP}_1(t + h),\\
+    dv(t + h) &= \kappa \left( \theta - v(t + h) \right) d(t + h) + \sigma \rho \sqrt{v(t + h)} dW^{\PP}_1(t + h) + \sigma \sqrt{v(t + h)} \sqrt{1 - \rho^2} dW^{\PP}_2(t + h).
+\end{align*}
+\newpage
+We now assume - as we are told that $\mathcal{V}$ is sufficiently smooth - that $\mathcal{V}(t,x,u)\in C^{\text{1,2}}$ for the purpose of
+applying multi-dimensional Ito Theorem 4.19 \cite{bjork2020}. This yields the
+dynamics of the value process, $\mathcal{V}(t,x,u)$, for some arbitrary
+constant investment strategy, $\pi$:
+\begin{equation*}
+    \hspace*{-1.5cm}
+    \begin{aligned}
+        d\mathcal{V}(t + h, X^\pi(t + h), v(t + h)) &= \mathcal{V}_t d(t + h) + \mathcal{V}_x dX^\pi(t + h) + \mathcal{V}_v dv(t + h) \\
+        &\quad + \frac{1}{2} \mathcal{V}_{xx} \left(dX^\pi(t + h)\right)^2 + \frac{1}{2} \mathcal{V}_{vv} \left(dv(t + h)\right)^2 \\
+        &\quad + \frac{1}{2} 2\mathcal{V}_{xv} \left(dX^\pi(t + h)\right)\left(dv(t + h)\right) \\
+        &= \mathcal{V}_t d(t + h) + \mathcal{V}_x X^\pi(t + h) \left( r + \pi \bar{\lambda} v(t + h) \right) d(t + h) \\
+        &\quad + \mathcal{V}_x X^\pi(t + h) \pi \sqrt{v(t + h)} dW^\PP_1(t + h) + \mathcal{V}_v \kappa \left( \theta - v(t + h) \right) d(t + h) \\
+        &\quad + \mathcal{V}_v \sigma \rho \sqrt{v(t + h)} dW^\PP_1(t + h) + \mathcal{V}_v \sigma \sqrt{v(t + h)} \sqrt{1 - \rho^2} dW^\PP_2(t + h) \\
+        &\quad + \frac{1}{2} \mathcal{V}_{xx} (X^\pi(t + h))^2 \pi^2 v(t + h) d(t + h) + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 \rho^2 v(t + h) d(t + h) \\
+        &\quad + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 v(t + h) \left(1 - \rho^2\right) d(t + h) + \mathcal{V}_{xv} X^\pi(t + h) \pi v(t + h) \sigma \rho d(t + h) \\
+        &= \Biggl(\mathcal{V}_t + \mathcal{V}_x X^\pi(t + h) \left( r + \pi \bar{\lambda} v(t + h) \right) + \mathcal{V}_v \kappa \left( \theta - v(t + h) \right) \\
+        &\quad\quad  + \frac{1}{2} \mathcal{V}_{xx} (X^\pi(t + h))^2 \pi^2 v(t + h) + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 v(t + h) + \mathcal{V}_{xv} X^\pi(t + h) \pi v(t + h) \sigma \rho  \Biggr) d(t + h) \\
+        &\quad + \left( \mathcal{V}_x X^\pi(t + h) \pi \sqrt{v(t + h)} + \mathcal{V}_v \sigma \rho \sqrt{v(t + h)} \right) dW^\PP_1(t + h) \\
+        &\quad + \mathcal{V}_v \sigma \sqrt{v(t + h)} \sqrt{1 - \rho^2} dW^\PP_2(t + h),
+        \end{aligned}.
+\end{equation*}
+where we used the extended multiplication rules $dW_t^i dW_t^i=0$, $j\neq i$
+\cite{bjork2020}, p. 61
+and the dynamics of both $v(t+h)$ and $X^\pi(t+h)$ as they were stated in the excercise.
+
+By the dynamics found using multi-dimensional Ito we now have that in integral
+notation:
+\begin{align*}
+    \mathcal{V}(t + h, X^\pi(t + h), v(t + h)) &= \mathcal{V}(t, X^\pi(t), v(t)) \\
+&\quad+ \int_{t}^{t+h} \Biggl( \mathcal{V}_t + \mathcal{V}_x X^\pi(s) \left( r + \pi \bar{\lambda} v(s) \right) + V_v \kappa \left( \theta - v(s) \right) \\
+&\quad \quad + \frac{1}{2} \mathcal{V}_{xx} (X^\pi(s))^2 \pi^2 v(s) + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 v(s) + \mathcal{V}_{xv} X^\pi(s) \pi v(s) \sigma \rho \Biggr) ds \\
+&\quad+ \int_{t}^{t+h} \left( \mathcal{V}_x X^\pi(s) \pi \sqrt{v(s)} + \mathcal{V}_v \sigma \rho \sqrt{v(s)} \right) dW^\PP_1(s) \\
+&\quad+ \int_{t}^{t+h} \mathcal{V}_v \sigma \sqrt{v(s)} \sqrt{1 - \rho^2} dW^\PP_2(s),
+\end{align*}
+as desired.
+\newpage
+$\textcolor{blue}{\star}$ Substitution of equation
+(21) into (20) yields:
+\begin{align*}
+\mathcal{V}(t, x, v) &\geq \EE \left( \mathcal{V}(t+h, X^\pi(t+h), v(t+h)) \mid X^\pi(t)=x,v(t)=v \right )\\
+&= \EE \left( \mathcal{V}(t, X^\pi(t), v(t)) + \int_{t}^{t+h} \Bigl( \mathcal{V}_t + \mathcal{V}_x X^\pi(s) \left( r + \pi\bar{\lambda} v(s) \right) + \mathcal{V}_v \kappa \left( \theta - v(s) \right) \right.  \\
+&\quad\quad \left. + \frac{1}{2} \mathcal{V}_{xx} (X^\pi(s))^2 \pi^2 v(s) + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 v(s) + \mathcal{V}_{xv} X^\pi(s) \pi v(s) \sigma \rho \Bigr) ds \right. \\
+&\quad \left. + \int_{t}^{t+h} \left( \mathcal{V}_x X^\pi(s) \pi \sqrt{v(s)} + \mathcal{V}_v \sigma \rho \sqrt{v(s)} \right) dW^\PP_1(s) \right. \\
+&\quad \left. + \int_{t}^{t+h} \mathcal{V}_v \sigma \sqrt{v(s)} \sqrt{1 - \rho^2} dW^\PP_2(s) \mid X^\pi(t) = x, v(t) = v \right) \\
+&\overset{\dagger}{=} \mathcal{V}(t, x, v) + \EE \Bigl( \int_{t}^{t+h} \Bigl( \mathcal{V}_t + \mathcal{V}_{x} X^\pi(s)  \left( r + \pi v(s)\bar{\lambda} \right) + \mathcal{V}_v \kappa \left( \theta - v(s) \right)  \\
+&\quad \quad + \frac{1}{2} \mathcal{V}_{xx}(X^\pi(s) )^2 \pi^2 v(s) + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 v(s)+ \mathcal{V}_{xv} X^\pi(s) \pi v(s) \sigma \rho \Bigr) ds \mid X^\pi(t)=x,v(t)=v \Bigr)\\
+&\iff\\
+ 0 &\geq \mathcal{V}(t, x, v) + \EE \Biggl( \int_t^{t+h}\Bigl( \mathcal{V}_t + \mathcal{V}_{x}  X^\pi(s)\left( r + \pi v(s) \bar{\lambda} \right) + \mathcal{V}_v \kappa \left( \theta - v(s) \right) \\
+&\quad  \quad + \frac{1}{2} \mathcal{V}_{xx}( X^\pi(s))^2 \pi^2 v(s) + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 v(s) + \mathcal{V}_{xv} X^\pi(s) \pi v(s) \sigma \rho \Bigr)ds \mid  X^\pi(t)=x,v(t)=v \Biggr) - \mathcal{V}(t, x, v) \\
+&=\EE \Biggl( \int_t^{t+h}\Bigl( \mathcal{V}_t + \mathcal{V}_{x}  X^\pi(s)\left( r + \pi v(s) \bar{\lambda} \right) + \mathcal{V}_v \kappa \left( \theta - v(s) \right) \\
+&\quad \quad + \frac{1}{2} \mathcal{V}_{xx}( X^\pi(s))^2 \pi^2 v(s) + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 v(s) + \mathcal{V}_{xv} X^\pi(s) \pi v(s) \sigma \rho \Bigr)ds \mid  X^\pi(t)=x,v(t)=v \Biggr),
+\end{align*}
+where $\dagger$ follows from both that: 1) The Brownian motion process is a
+Martingale implying it beloning to the class $\pounds^2$
+and thus yielding conditional expectation zero by proposition 4.8
+\cite{bjork2020} 2) The linearity of the expectation operator.
+
+In equation (20), the left-hand side (LHS) delineates the value function under
+an optimal investment strategy across the interval $[t, T]$. Conversely, the
+right-hand side (RHS) delineates the value function when adopting any investment
+strategy during the interval $[t, t + h)$, followed by a shift to an optimal
+investment strategy for $[t + h, T]$. Thus, the essence of equation (20) is
+that opting for an arbitrary investment strategy within the interval $[t, t+h)$,
+before transitioning to an optimal strategy for $[t+h, T]$, is, on average, not
+superior to consistently adhering to an optimal investment strategy throughout
+the entire interval $[t, T]$.
+
+$\textcolor{blue}{\star}$ As stated we want to divide by $h$, let $h\downarrow 0$. For
+readability, define the integrand from the previous "$\textcolor{blue}{\star}$" as:
+\begin{align*}
+    M(s):=\mathcal{V}_t + \mathcal{V}_{x}  X^\pi(s)\left( r + \pi v(s) \bar{\lambda} \right) + \mathcal{V}_v \kappa \left( \theta - v(s) \right) + \frac{1}{2} \mathcal{V}_{xx}( X^\pi(s))^2 \pi^2 v(s) + \frac{1}{2} \mathcal{V}_{vv} \sigma^2 v(s) + \mathcal{V}_{xv} X^\pi(s) \pi v(s) \sigma \rho.
+\end{align*}
+In other words, rewrite the previous "$\textcolor{blue}{\star}$" inequality as:
+\begin{align*}
+    0\geq \EE \left ( \int_t^{t+h}M(s)\:ds \mid X^\pi(t)=x,v(t)=v \right ).
+\end{align*}
+Dividing now by $h$ yields:
+\begin{align*}
+    \frac{0}{h}&=0\\
+    &\geq \frac{\EE \left ( \int_t^{t+h}M(s)\:ds \mid X^\pi(t)=x,v(t)=v \right )}{h}\\
+    &\overset{\dagger}{=}\frac{\EE \left ( \int_0^{t+h}M(s)\:ds-\int_0^{t}M(s)\:ds \mid X^\pi(t)=x,v(t)=v \right )}{h}\\
+    &\overset{\dagger\dagger}{=}\EE \left ( \frac{\int_0^{t+h}M(s)\:ds-\int_0^{t}M(s)\:ds}{h} \mid X^\pi(t)=x,v(t)=v \right ),
+\end{align*}
+where $\dagger$ follows from the additivity and linearity of the integral (as
+$M(s)$ is a shorthand) and $\dagger \dagger$
+from the linearity of the expectation operator.
+Letting $h\downarrow 0$ now yields:
+\begin{align*}
+    \lim_{h\downarrow 0}0&=0\\
+    &\geq \lim_{h\downarrow 0}\EE \left ( \frac{\int_0^{t+h}M(s)\:ds-\int_0^{t}M(s)\:ds}{h} \mid X^\pi(t)=x,v(t)=v \right )\\
+    &\overset{\dagger}{=}\EE \left (\lim_{h\downarrow 0} \frac{\int_0^{t+h}M(s)\:ds-\int_0^{t}M(s)\:ds}{h} \mid X^\pi(t)=x,v(t)=v \right )\\
+    &\overset{\dagger\dagger}{=}\EE \left (\lim_{h\downarrow 0} \frac{f(t+h)-f(t)}{h} \mid X^\pi(t)=x,v(t)=v \right )\\
+    &=\EE \left ( f'(t) \mid X^\pi(t)=x,v(t)=v \right )\\
+    &=\EE \left ( M(t) \mid X^\pi(t)=x,v(t)=v \right )\\
+    &\overset{\dagger\dagger\dagger}{=}\mathcal{V}_t + \frac{1}{2}\sigma^2 \mathcal{V}_{vv}+\kappa(\theta-v)\mathcal{V}_v+ x\left(r + \pi\bar{\lambda} \right)V_x + \frac{1}{2}\pi^2x^2vV_{xx} + \pi x \sigma v \rho V_{xv},
+\end{align*}
+where $\dagger$ follows from Lebesgue's Dominated Convergence (LDC) as the
+function $M(s)$ is bounded and
+$\dagger\dagger$ (and forward) from the definition of a derivative and the
+Fundamental Theorem of Calculus (FToC) with $f(t)=\int_0^t
+M(s)\:ds$, implying $f'(t)=M(t)$. $\dagger\dagger\dagger$ is
+simply from definition using the conditional expectation and unwinding the shorthand notation defined at the start.
+
+$\textcolor{blue}{\star}$ Let $\pi^*$ represent the optimal investment strategy. It follows that $\pi^*$ is uniquely determined as the solution to the following optimization problem:
+\begin{align*}
+    g(\pi):=\sup_\pi \left\{ x\left(r + \pi\bar{\lambda}v\right)V_x + \frac{1}{2}\pi^2x^2vV_{xx} + \pi x \sigma v \rho V_{xv} \right\},
+\end{align*}
+which signifies that $\pi^*$ is the supremum of $\pi^*$ across all conceivable
+or permissible investment strategies. Furthermore, since the previously found
+inequality holds for any constant investment strategy $\pi$, it follows from the
+previously found inequality that:
+\begin{align*}
+    0\geq \mathcal{V}_t + \frac{1}{2}\sigma^2 \mathcal{V}_{vv}+\kappa(\theta-v)\mathcal{V}_v+\sup_\pi \left\{ x\left(r + \pi\bar{\lambda}v\right)V_x + \frac{1}{2}\pi^2x^2vV_{xx} + \pi x \sigma v \rho V_{xv} \right\}.
+\end{align*}
+Given that $\pi^*$ is the optimal investment strategy, defined as the supremum
+over $\pi$, it follows that for this $\pi^*$, equation (20) must be satisfied
+with equality. Recall that in equation (20), the left-hand side (LHS) delineates the value function under
+an optimal investment strategy across the interval $[t, T]$. Conversely, the
+right-hand side (RHS) delineates the value function when adopting any investment
+strategy during the interval $[t, t + h)$, followed by a shift to an optimal
+investment strategy for $[t + h, T]$. Thus, the essence of equation (20) is
+that opting for an arbitrary investment strategy within the interval $[t, t+h)$,
+before transitioning to an optimal strategy for $[t+h, T]$, is, on average, not
+superior to consistently adhering to an optimal investment strategy throughout
+the entire interval $[t, T]$. Currently, we find ourselves in a scenario where
+an optimal strategy is employed over the intervals $[t, t + h)$ and $[t + h,
+T]$. This approach is tantamount to adhering to an optimal investment strategy
+throughout the entire period $[t, T]$. Consequently, it is imperative that
+equation (20) is satisfied with equality for $\pi^*$.
+
+We adhere to the mercy of the court to let us re-use the just found dynamics the
+the previous question for $\mathcal{V}$ (or the fact that Yevhen said it was
+allowed at the Q\&A). Doing the exact same calculations
+- other than the exact same deriviation for the dynamics - using the optimal investment strategy $\pi^*$ now yields:
+\begin{align*}
+    \mathcal{V}(t + h, X^{\pi^*}(t + h), v(t + h)) =\ &\mathcal{V}(t, X^{\pi^*}(t), v(t)) \\
+    &+ \int_{t}^{t+h} \left( \mathcal{V}_t + \frac{1}{2} \sigma^2 v (s) \mathcal{V}_{vv} + \kappa \left( \theta - v(s) \right) \mathcal{V}_v \right. \\
+    &\quad \left. + \sup_\pi \lc X^{\pi^*} \left( r + \pi \bar{\lambda} v(s) \right) \mathcal{V}_x + \frac{1}{2} \pi^2 (X^{\pi^*})^2 v(s) \mathcal{V}_{xx} + \pi X^{\pi^*} \sigma v(s) \rho \mathcal{V}_{xv} \rc \right) ds \\
+    &+ \int_{t}^{t+h} \left( \sup_\pi \lc \mathcal{V}_x X^{\pi}(s) \pi \sqrt{v(s)} \rc + \mathcal{V}_v \sigma \rho \sqrt{v(s)} \right) dW^\PP_1(s) \\
+    &+ \int_{t}^{t+h} \mathcal{V}_v \sigma \sqrt{v(s)} \sqrt{1 - \rho^2} dW^\PP_2(s).
+\end{align*}
+\newpage
+As $\pi^*$ is the optimal investment strategy, as argued above, we now have that
+equation (20) must hold with equality:
+\begin{equation*}
+    \hspace*{-1.7cm}
+    \begin{aligned}
+    \mathcal{V}(t, x, v) &= \EE \left( \mathcal{V}(t+h, X^{\pi^*}(t+h), v(t+h)) \mid X^{\pi^*}(t)=x,v(t)=v \right )\\
+    &= \EE \Biggl( \mathcal{V}(t, X^{\pi^*}(t), v(t)) + \int_{t}^{t+h} \left( \mathcal{V}_t + \frac{1}{2} \sigma^2 v (s) \mathcal{V}_{vv} + \kappa \left( \theta - v(s) \right) \mathcal{V}_v \right. \\
+    &\quad \quad \left. + \sup_\pi \lc X^{\pi^*}(s) \left( r + \pi \bar{\lambda} v(s) \right) \mathcal{V}_x + \frac{1}{2} \pi^2 (X^{\pi^*}(s))^2 v \mathcal{V}_{xx} + \pi X^{\pi^*}(s) \sigma v(s) \rho \mathcal{V}_{xv} \rc \right) ds \\
+    &\quad + \int_{t}^{t+h} \left( \sup_\pi \lc \mathcal{V}_x X^{\pi^*}(s) \pi \sqrt{v(s)} \rc + \mathcal{V}_v \sigma \rho \sqrt{v(s)} \right) dW^\PP_1(s) \\
+    &\quad + \int_{t}^{t+h} \mathcal{V}_v \sigma \sqrt{v(s)} \sqrt{1 - \rho^2} dW^\PP_2(s) \mid X^{\pi^*}(t)=x,v(t)=v  \Biggr) \\
+    &\overset{\dagger}{=} \mathcal{V}(t, x, v) + \EE \Biggl( \int_{t}^{t+h} \left( \mathcal{V}_t + \frac{1}{2} \sigma^2 v (s) \mathcal{V}_{vv} + \kappa \left( \theta - v(s) \right) \mathcal{V}_v \right. \\
+    &\quad \quad  \left. + \sup_\pi \lc X^{\pi^*}(s) \left( r + \pi \bar{\lambda} v(s) \right) \mathcal{V}_x + \frac{1}{2} \pi^2 (X^{\pi^*}(s))^2 v(s) \mathcal{V}_{xx} + \pi X^{\pi^*}(s) \sigma v(s) \rho \mathcal{V}_{xv} \rc \right) ds \mid X^{\pi^*}(t)=x,v(t)=v \Biggr)\\
+    &\iff\\
+    0 &= \mathcal{V}(t, x, v) + \EE \Biggl( \int_{t}^{t+h} \left( \mathcal{V}_t + \frac{1}{2} \sigma^2 v (s) \mathcal{V}_{vv} + \kappa \left( \theta - v(s) \right) \mathcal{V}_v \right. \\
+    &\quad \quad  \left. + \sup_\pi \lc X^{\pi^*}(s) \left( r + \pi \bar{\lambda} v(s) \right) \mathcal{V}_x + \frac{1}{2} \pi^2 (X^{\pi^*})^2(s) v(s) \mathcal{V}_{xx} + \pi X^{\pi^*}(s) \sigma v(s) \rho \mathcal{V}_{xv} \rc \right) ds \mid X^{\pi^*}(t)=x,v(t)=v \Biggr) - \mathcal{V}(t, x, v) \\
+    &=\EE \Biggl( \int_{t}^{t+h} \left( \mathcal{V}_t + \frac{1}{2} \sigma^2 v (s) \mathcal{V}_{vv} + \kappa \left( \theta - v(s) \right) \mathcal{V}_v \right. \\
+    &\quad\quad  \left. + \sup_\pi \lc X^{\pi^*}(s) \left( r + \pi \bar{\lambda} v(s) \right) \mathcal{V}_x + \frac{1}{2} \pi^2 (X^{\pi^*})^2 v(s) \mathcal{V}_{xx} + \pi X^{\pi^*}(s) \sigma v(s) \rho \mathcal{V}_{xv} \rc \right) ds \mid X^{\pi^*}(t)=x,v(t)=v \Biggr),
+    \end{aligned}
+\end{equation*}
+where $\dagger$ follows from both that: 1) The Brownian motion process is a
+Martingale, beloning to the class $\pounds^2$,
+and thus yielding conditional expectation zero by proposition 4.8 \cite{bjork2020}, 2) The linearity of the expectation operator.
+
+In the same manner as the previous "$\textcolor{blue}{\star}$", define:
+\begin{align*}
+    J(s):=\mathcal{V}_t + \frac{1}{2} \sigma^2 v (s) \mathcal{V}_{vv} + \kappa \left( \theta - v(s) \right) \mathcal{V}_v + \sup_\pi \lc X^{\pi^*}(s) \left( r + \pi \bar{\lambda} v(s) \right) \mathcal{V}_x + \frac{1}{2} \pi^2 (X^{\pi^*}(s))^2 v(s) \mathcal{V}_{xx} + \pi X^{\pi^*}(s) \sigma v(s) \rho \mathcal{V}_{xv} \rc.
+\end{align*}
+In other words:
+\begin{align*}
+    0 = \EE \left ( \int_t^{t+h}J(s)\:ds \mid X^{\pi^*}(t)=x,v(t)=v \right ).
+\end{align*}
+Dividing now by $h$ yields:
+\begin{align*}
+    \frac{0}{h}&=0\\
+    &= \frac{\EE \left ( \int_t^{t+h}J(s)\:ds \mid X^{\pi^*}(t)=x,v(t)=v \right )}{h}\\
+    &\overset{\dagger}{=}\frac{\EE \left ( \int_0^{t+h}J(s)\:ds-\int_0^{t}J(s)\:ds \mid X^{\pi^*}(t)=x,v(t)=v \right )}{h}\\
+    &\overset{\dagger\dagger}{=}\EE \left ( \frac{\int_0^{t+h}J(s)\:ds-\int_0^{t}J(s)\:ds}{h} \mid X^{\pi^*}(t)=x,v(t)=v \right ),
+\end{align*}
+where $\dagger$ follows from the additivity and linearity of the integral and $\dagger \dagger$
+from the linearity of the expectation.
+Letting $h\downarrow 0$ now yields:
+\begin{align*}
+    \lim_{h\downarrow 0}0&=0\\
+    &= \lim_{h\downarrow 0}\EE \left ( \frac{\int_0^{t+h}J(s)\:ds-\int_0^{t}J(s)\:ds}{h} \mid X^{\pi^*}(t)=x,v(t)=v \right )\\
+    &\overset{\dagger}{=}\EE \left (\lim_{h\downarrow 0} \frac{\int_0^{t+h}J(s)\:ds-\int_0^{t}J(s)\:ds}{h} \mid X^{\pi^*}(t)=x,v(t)=v \right )\\
+    &\overset{\dagger\dagger}{=}\EE \left (\lim_{h\downarrow 0} \frac{f(t+h)-f(t)}{h} \mid X^{\pi^*}(t)=x,v(t)=v \right )\\
+    &=\EE \left ( f'(t) \mid X^{\pi^*}(t)=x,v(t)=v \right )\\
+    &=\EE \left ( J(t) \mid X^{\pi^*}(t)=x,v(t)=v \right )\\
+    &\overset{\dagger\dagger\dagger}{=}\mathcal{V}_t + \frac{1}{2} \sigma^2 v \mathcal{V}_{vv} + \kappa \left( \theta - v \right) \mathcal{V}_v + \sup_\pi \lc x \left( r + \pi \bar{\lambda} v \right) \mathcal{V}_x + \frac{1}{2} \pi^2 x^2 v \mathcal{V}_{xx} + \pi x \sigma v \rho \mathcal{V}_{xv} \rc,
+\end{align*}
+where $\dagger$ follows from Lebesgue's Dominated Convergence (LDC) as the
+function $J(s)$ is bounded and
+$\dagger\dagger$ (and forward) from the definition of a derivative and the
+Fundamental Theorem of Calculus (FToC) with $f(t)=\int_0^t
+J(s)\:ds$, implying $f'(t)=J(t)$. $\dagger\dagger\dagger$ is
+simply by definition using the conditional expectation and unwinding the shorthand notation defined at the start. The last equality
+is exactly the Hamilton-Jacobi-Bellman partial differential equation HJB PDE,
+equation (22)
+
+\newpage
 \subsection{Solution to the Hamilton-Jacobi-Bellman PDE}
+$\textcolor{blue}{\star}$ The definition of the function $g(\pi)$ is seen in the
+underbrace of equation (22). We find the FOC of $g$:
+\begin{align*}
+    g'(\pi) = x\bar{\lambda} v \mathcal{V}_x + \frac{1}{2} 2\pi x^2 v \mathcal{V}_{xx} + x\sigma v\rho \mathcal{V}_{xv} &= 0 \\
+    &\overset{\dagger}{\iff}\\
+     \bar{\lambda} \mathcal{V}_x + \pi x \mathcal{V}_{xx} + \sigma\rho \mathcal{V}_{xv} &= 0 \\
+    &\iff\\
+      -\bar{\lambda} \mathcal{V}_x - \sigma\rho \mathcal{V}_{xv}&=\mathcal{V}_{xx}\pi x  \\
+     &\iff\\
+     \pi&=-\frac{\bar{\lambda} \mathcal{V}_x}{x \mathcal{V}_{xx}} - \frac{\sigma\rho \mathcal{V}_{xv}}{x \mathcal{V}_{xx}} \\
+     &\overset{\dagger\dagger}{=}-\frac{\bar{\lambda} \mathcal{V}_x(t, x, v)}{x \mathcal{V}_{xx}(t, x, v)} - \frac{\sigma\rho \mathcal{V}_{xv}(t, x, v)}{x \mathcal{V}_{xx}(t, x, v)} 
+    \\&=: \pi^*(t, x, v) \\&\overset{\dagger\dagger\dagger}{>} 0,
+\end{align*}
+where $\dagger$ follows from dividing through by $xv$, $\dagger\dagger$ was simply undwinding the shorthand notation and
+$\dagger\dagger\dagger$ from the assumption  $\mathcal{V}_{xx}<0$. Lastly, we have:
+\begin{align*}
+    g''(\pi)&=x\mathcal{V}_{xx}\\
+    &\overset{\dagger}{<}0.
+\end{align*}
+where $\dagger$ follows from $\mathcal{V}_{xx}<0$ and $x>0$. It is thus shown that equation (23), $\pi^*$, is a unique
+maximizer to $g(\pi)$.
+
+\newpage
+$\textcolor{blue}{\star}$ By substitution of equation (23) into equation (22)
+with trial by fire and algebra now yields the PDE in $\mathcal{V}$ with terminal
+condition $\mathcal{V}(T,x,v)=U(x)$:
+\begin{equation*}
+    \hspace*{-1.3cm}
+    \begin{aligned}
+        0 &= \mathcal{V}_t + \frac{1}{2} \sigma^2 v \mathcal{V}_{vv} + \kappa (\theta - v) \mathcal{V}_v + \sup_\pi \lc x \left ( r + \pi \bar{\lambda}v \right) \mathcal{V}_x + \frac{1}{2} \pi^2 x^2 v \mathcal{V}_{xx} + \pi x \sigma v \rho \mathcal{V}_{xv} \rc \\
+        &= \mathcal{V}_t + \frac{1}{2} \sigma^2 v \mathcal{V}_{vv} + \kappa (\theta - v) \mathcal{V}_v + x \left ( r + \pi^* (t, x, v) \bar{\lambda} v\right) \mathcal{V}_x + \frac{1}{2} \left( \pi^* (t, x, v) \right)^2 x^2 v \mathcal{V}_{xx} + \pi^* (t, x, v) x \sigma v \rho \mathcal{V}_{xv} \\
+        &= \mathcal{V}_t + \frac{1}{2} \sigma^2 v \mathcal{V}_{vv} + \kappa \theta \mathcal{V}_v - \kappa v \mathcal{V}_v + x r \mathcal{V}_x + \pi^* (t, x, v) x\bar{\lambda}v \mathcal{V}_x + \frac{1}{2} \left( \pi^* (t, x, v) \right)^2 x^2 v \mathcal{V}_{xx} + \pi^* (t, x, v) x \sigma v \rho \mathcal{V}_{xv} \\
+        &= \mathcal{V}_t + \kappa \theta \mathcal{V}_v + x r \mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v + \pi^* (t, x, v) \left( x \bar{\lambda} \mathcal{V}_x + \frac{1}{2} \pi^* (t, x, v) x^2 \mathcal{V}_{xx} + x \sigma \rho \mathcal{V}_{xv} \right) \right) \\
+        &= \mathcal{V}_t + \kappa \theta \mathcal{V}_v + x r \mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v + \left( -\bar{\lambda} \frac{\mathcal{V}_x}{x \mathcal{V}_{xx}} - \sigma \rho \frac{\mathcal{V}_{xv}}{x \mathcal{V}_{xx}} \right) \left ( x \bar{\lambda} \mathcal{V}_x + \frac{1}{2} \left( -\bar{\lambda} \frac{\mathcal{V}_x}{x \mathcal{V}_{xx}} - \sigma \rho \frac{\mathcal{V}_{xv}}{x \mathcal{V}_{xx}} \right) x^2 \mathcal{V}_{xx} + x \sigma \rho \mathcal{V}_{xv} \right) \right )\\
+        &=\mathcal{V}_t + \kappa \theta \mathcal{V}_v + x r \mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v + \left( -\bar{\lambda} \frac{\mathcal{V}_x}{x \mathcal{V}_{xx}} - \sigma \rho \frac{\mathcal{V}_{xv}}{x \mathcal{V}_{xx}} \right) \left ( x \bar{\lambda} \mathcal{V}_x - \frac{1}{2} \bar{\lambda}\mathcal{V}_xx - \frac{1}{2} x\sigma \rho  \mathcal{V}_{xv} + x \sigma \rho \mathcal{V}_{xv} \right) \right )\\
+        &= \mathcal{V}_t + \kappa \theta \mathcal{V}_v + x r \mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v + \frac{1}{\mathcal{V}_{xx}} \left( -\bar{\lambda} \mathcal{V}_x \frac{1}{x} - \sigma \rho \frac{1}{x} \mathcal{V}_{xv} \right) \left ( \frac{1}{2} \bar{\lambda} \mathcal{V}_{x}x + \frac{1}{2} x \sigma \rho \mathcal{V}_{xv} \right) \right) \\
+        &= \mathcal{V}_t + \kappa \theta \mathcal{V}_v + x r \mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v + \frac{1}{\mathcal{V}_{xx}} \left( - \frac{1}{2} \left( \bar{\lambda} \mathcal{V}_x \right)^2 - \frac{1}{2} \sigma \rho \bar{\lambda} \mathcal{V}_x \mathcal{V}_{xv} - \frac{1}{2} \bar{\lambda} \sigma \rho \mathcal{V}_x \mathcal{V}_{xv} - \frac{1}{2} \left( \sigma \rho \mathcal{V}_{xv} \right)^2 \right) \right) \\
+        &= \mathcal{V}_t + \kappa \theta \mathcal{V}_v + x r \mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v + \frac{1}{\mathcal{V}_{xx}} \left( - \frac{1}{2} \left( \bar{\lambda} \mathcal{V}_x \right)^2 - \sigma \rho \bar{\lambda} \mathcal{V}_x \mathcal{V}_{xv} - \frac{1}{2} \left( \sigma \rho \mathcal{V}_{xv} \right)^2 \right) \right) \\
+        &= \mathcal{V}_t + \kappa \theta \mathcal{V}_v + x r \mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v - \frac{1}{2} \left( \bar{\lambda} \mathcal{V}_x + \sigma \rho \mathcal{V}_{xv} \right)^2 \frac{1}{\mathcal{V}_{xx}} \right)\\
+        &=\mathcal{V}_t + \kappa \theta \mathcal{V}_v + x r \mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v - \frac{1}{2} \frac{\left( \bar{\lambda} \mathcal{V}_x + \sigma \rho \mathcal{V}_{xv} \right)^2}{\mathcal{V}_{xx}} \right),
+        \end{aligned}
+\end{equation*}
+which is equation (24) as desired.
+
+$\textcolor{blue}{\star}$ We recall the terminal condition is
+$\mathcal{V}(T,x,v)=U(x)=x^p/p$. The seperation guessed solution (ansatz) for
+the optimal solution is equation (25). Firstly, we find the respective
+derivatives of $\mathcal{V}$ from equation (25):
+\begin{align*}
+    \mathcal{V}_x=ph\frac{x^{p-1}}{p},\quad \mathcal{V}_{xx}=(p-1)x^{p-2}h, \quad \mathcal{V}_{xv}=x^{p-1}h_v
+\end{align*}
+Substituting in the found derivatives into equation (23) now yields that the
+optimal investment strategy is given by:
+\begin{align*}
+    \pi^*(t,x,v)&=-\frac{\bar{\lambda} \mathcal{V}_x}{x \mathcal{V}_{xx}} - \frac{\sigma\rho \mathcal{V}_{xv}}{x \mathcal{V}_{xx}}\\
+    &=-\frac{\bar{\lambda} x^{p-1}h}{x(p-1)x^{p-2}h}-\sigma\rho\frac{x^{p-1}h_v}{x(p-1)x^{p-2}h}\\
+    &=-\frac{\bar{\lambda} }{p-1}-\frac{\sigma\rho}{p-1}\frac{h_v}{h}\\
+    &=\frac{\bar{\lambda} }{1-p}+\frac{\sigma\rho}{1-p}\frac{h_v}{h},
+\end{align*}
+which is exactly equation (26).
+
+\newpage
+$\textcolor{blue}{\star}$ Firstly, we find the respective
+derivatives of $\mathcal{V}$ from equation (25):
+\begin{align*}
+    \mathcal{V}_t &= \frac{x^p}{p} h_t, & \mathcal{V}_x &=ph\frac{x^{p-1}}{p} = x^{p-1}h, & \mathcal{V}_{xx} &= (p - 1)x^{p-2}h, \\
+    \mathcal{V}_{xv} &= x^{p-1}h_v, & \mathcal{V}_v &= \frac{x^p}{p} h_v, & \mathcal{V}_{vv} &= \frac{x^p}{p} h_{vv}.
+    \end{align*}
+Substituting the found derivatives into equation (24) yields the PDE for $h$:
+\begin{align*}
+    0 &= \mathcal{V}_t + \kappa\theta\mathcal{V}_v + xr\mathcal{V}_x + v \left( \frac{1}{2} \sigma^2 \mathcal{V}_{vv} - \kappa \mathcal{V}_v - \frac{1}{2}\frac{ \left( \bar{\lambda}\mathcal{V}_x + \sigma\rho\mathcal{V}_{xv} \right)^2 }{\mathcal{V}_{xx}} \right) \\
+    &= \frac{x^p}{p} h_t + \kappa\theta \frac{x^p}{p} h_v + xrx^{p-1}h + v \left( \frac{1}{2} \sigma^2 \frac{x^p}{p} h_{vv} - \kappa \frac{x^p}{p} h_v - \frac{1}{2} \frac{\left ( \bar{\lambda}x^{p-1}h+\sigma\rho x^{p-1}h_v\right )^2}{(p-1)x^{p-2}h}\right) \\
+    &= \frac{x^p}{p} h_t + \kappa\theta \frac{x^p}{p} h_v + rx^p h + v \left( \frac{1}{2} \sigma^2 \frac{x^p}{p} h_{vv} - \kappa \frac{x^p}{p} h_v - \frac{1}{2} \frac{x^{2p-2}\left (\bar{\lambda} h+\sigma\rho h_v\right )^2}{(p-1)x^{p-2}h} \right) \\
+    &= \frac{x^p}{p} h_t + \kappa\theta \frac{x^p}{p} h_v + rx^p h + v \left( \frac{1}{2} \sigma^2 \frac{x^p}{p} h_{vv} - \kappa \frac{x^p}{p} h_v - \frac{1}{2} \frac{x^p\left (\bar{\lambda} h+\sigma\rho h_v\right )^2}{(p-1)h} \right) \\
+    &= \frac{x^p}{p} h_t + \kappa\theta \frac{x^p}{p} h_v + rx^p h + v \left( \frac{1}{2} \sigma^2 \frac{x^p}{p} h_{vv} - \kappa \frac{x^p}{p} h_v + \frac{1}{2} \frac{x^p\left (\bar{\lambda} h+\sigma\rho h_v\right )^2}{(1-p)h} \right)  \\
+    &= \frac{x^p}{p} \left( h_t + \kappa\theta h_v + prh + v \left( \frac{1}{2} \sigma^2 h_{vv} - \kappa h_v + \frac{1}{2}\frac{p\left(h\bar{\lambda}+\rho \sigma h_v \right)^2}{(1-p)h}\right) \right) \\
+    &\iff\\
+    0 &= h_t + \kappa\theta h_v + prh + v \left( \frac{1}{2} \sigma^2 h_{vv} - \kappa h_v + \frac{1}{2} \frac{p\left(h\bar{\lambda}+\rho \sigma h_v \right)^2}{(1-p)h}\right),
+\end{align*}
+which is exactly equation (27).
+
+\newpage
+$\textcolor{blue}{\star}$ Firstly, we find the derivatives of $h$ given in
+equation (28):
+\begin{align*}
+    h_t &= \left(a'(\tau) \cdot (-1) + vb'(\tau) \cdot (-1)\right)h = -a'(\tau)h - b'(\tau)h_v, \\
+    h_v &= b(\tau)h,\quad h_{vv} = b^2(\tau)h.
+\end{align*}
+Substituting the found derivatives into equation (27), rearranging the terms to
+emphasize the linearity in $v$ as asked to, yields:
+\begin{align*}
+    0 &= h_t + \kappa\theta h_v + prh + v \left( \frac{1}{2} \sigma^2 h_{vv} - \kappa h_v + \frac{1}{2}  \frac{p\left( \bar{\lambda}h + \sigma\rho h_v \right)^2}{(1-p)h} \right) \\
+    &= h_t + \kappa\theta h_v + prh + v \left( \frac{1}{2} \sigma^2 h_{vv} - \kappa h_v + \frac{p\bar{\lambda}^2h^2}{2(1 - p)h} + \frac{p\sigma^2\rho^2h_v^2}{2(1 - p)h} + \frac{2p\bar{\lambda}\sigma\rho h h_v}{2(1 - p)h} \right) \\
+    &= h_t + \kappa\theta h_v + prh + v \left( \frac{1}{2} \sigma^2 h_{vv} - \kappa h_v + \frac{p\bar{\lambda}^2 h}{2(1 - p)} + \frac{p\sigma^2\rho^2h_v^2}{2(1 - p)h} + \frac{p \bar{\lambda} \sigma\rho  h_v}{1 - p} \right) \\
+    &= -a'(\tau)h - b'(\tau)h_v + \kappa\theta b(\tau)h + prh + v \left( \frac{1}{2} \sigma^2 b^2(\tau)h - \kappa b(\tau)h + \frac{p\bar{\lambda}^2h}{2(1 - p)}  + \frac{p\sigma^2\rho^2 b^2(\tau)h^2}{2(1 - p)h} + \frac{p\bar{\lambda}\sigma\rho b(\tau)h}{1 - p} \right) \\
+    &= -a'(\tau)h + b(\tau)\kappa\theta h + prh + v \left( -b'(\tau)h + b^2(\tau) \left( \frac{1}{2}\sigma^2h + \frac{p\sigma^2\rho^2h}{2(1 - p)} \right)  + b(\tau) \left( -\kappa h + \frac{p \bar{\lambda}\sigma\rho h}{1 - p} \right) + \frac{p \bar{\lambda}^2 h}{2(1 - p)} \right),
+    \end{align*}
+exactly as we wanted to show.
+
+\newpage
+$\textcolor{blue}{\star}$ The previously derived Partial Differential Equation
+(PDE) is satisfied if and only if both conditions $(***)$ and $(***\:*)$ are
+equal to zero. This condition is necessary for the PDE to be valid for all $\tau
+> 0$. As a result, these conditions lead to a set of Ordinary Differential
+Equations (ODEs) derived from $(***)$ and $(***\:*)$, which can be tackled
+independently (similar to our approach in Subsection 1.2). Eliminating the terms involving $h$ and reorganizing the PDE, we
+deduce two separate ordinary differential equations concerning the functions $a$
+and $b$:
+\begin{align*}
+    0 &= -a'(\tau)h + b(\tau)\kappa\theta h + prh \\
+    &\quad+ v\left( -b'(\tau)h + b^2(\tau) \left( \frac{1}{2} \sigma^2 h + \frac{p\sigma^2\rho^2 h^2}{2(1 - p)} \right) \right. \left. + b(\tau) \left( -\kappa h + \frac{p\bar{\lambda}\sigma\rho h}{1 - p} \right) + \frac{p\bar{\lambda}^2h}{2(1 - p)} \right) \\
+    &\iff\\
+     0 &= h\left(\underbrace{-a'(\tau) + b(\tau)\kappa\theta + pr}_{(***)}\right) \\
+     &\quad + vh \bigg( \underbrace{-b'(\tau) + b^2(\tau) \left( \frac{1}{2} \sigma^2 + \frac{p\sigma^2\rho^2}{2(1 - p)} \right)+ b(\tau) \left( -\kappa + \frac{p\bar{\lambda}\sigma\rho}{1 - p} \right) + \frac{p\bar{\lambda}^2}{2(1 - p)}}_{(****)} \bigg)\\
+    &\iff\\
+    &\begin{cases}
+    \underbrace{- a'(\tau) + b(\tau)\kappa\theta + pr}_{(***)} = 0, &  \\
+    \underbrace{- b'(\tau) + b^2(\tau) \left( \frac{1}{2} \sigma^2 + \frac{p\sigma^2\rho^2}{2(1-p)} \right) + b(\tau) \left( -\kappa + \frac{p\bar{\lambda}\sigma\rho }{1-p} \right) + \frac{p\bar{\lambda}^2}{2(1-p)}}_{(****)} = 0 &
+    \end{cases} \\
+    &\overset{\dagger}{\iff}\\
+    &\begin{cases}
+    a'(\tau) = \kappa\theta b(\tau) + pr, \\
+    b'(\tau) = \frac{1}{2} \underbrace{\left( \sigma^2 + \frac{p\sigma^2\rho^2}{1 - p} \right)}_{=:k_2}b^2(\tau) - \underbrace{\left( \kappa - \frac{p\bar{\lambda}\sigma\rho }{1 - p} \right)}_{=:k_1} b(\tau)+\frac{1}{2}\underbrace{\frac{p\bar{\lambda}^2}{1-p}}_{=:k_0}
+    \end{cases} \\
+    &\iff\\
+    &\begin{cases}
+    a'(\tau) = \kappa\theta b(\tau) + pr, \\
+    b'(\tau) = \frac{1}{2} k_2 b^2(\tau) - k_1 b(\tau) + \frac{1}{2} k_0,
+    \end{cases},
+\end{align*}
+where the underbraces in $\dagger$ follow from the Handin \#3 description. Furthermore, we are told that the boundary condition for $h$ is exactly given by
+$h(T,z)=1$, $\forall z>0$, which yields:
+\begin{align*}
+    h(T,z)&=\exp{\lc a(\tau(T))+b(\tau(T))z\rc}\\
+    &=1\\
+    &\iff\\
+    a(0)=a(\tau(T))=0 \quad     &\: \: \text{and} \quad b(0)=b(\tau(T))=0,
+\end{align*}
+which defines the sufficient boundary conditions for the functions $a,\:b$.
+\newpage
+$\textcolor{blue}{\star}$  By equation (28) we can rewrite to:
+\begin{align*}
+    \mathcal{V}_{xx}=(p-1)x^{p-2}\exp{\lc a(\tau)+b(\tau)v \rc}
+\end{align*}
+Using the definitions for $k_i$ (and not $\kappa$), $i\in \{0,1,2\}$ that are underbraced in the
+first equality in equation (30) now yields:
+\begin{align*}
+    k^2 (1 - k_0k_2) &= \left( \kappa - \frac{p\bar{\lambda}\sigma\rho h}{1 - p} \right)^2 - \left( \frac{p\bar{\lambda}^2}{1 - p} \right) \left( \sigma^2 + \frac{p\sigma^2\rho^2}{1 - p} \right) \\
+    &= \kappa^2 + \frac{p^2\bar{\lambda}^2\sigma^2\rho^2}{(1 - p)^2} - 2\kappa \frac{p\bar{\lambda}\sigma\rho}{1 - p} - \frac{p\bar{\lambda}^2}{1 - p} \sigma^2 - \frac{p^2\bar{\lambda}^2\sigma^2\rho^2}{(1 - p)^2} \\
+    &= \kappa^2 - 2\kappa \frac{p \bar{\lambda}\sigma\rho }{1 - p} - \frac{p\bar{\lambda}^2}{1 - p} \sigma^2 \\
+    &= \kappa^2 -  \frac{2\kappa p \bar{\lambda}\sigma\rho-p\bar{\lambda}^2}{1 - p} \sigma^2 \\
+    &=\frac{\kappa^2 (1 - p) - 2\kappa p \bar{\lambda}\sigma\rho h - p\bar{\lambda}^2\sigma^2 }{1 - p} \\
+    &> 0 \\
+    &\iff\\
+    1 - p&> 0 \\
+    &\Rightarrow\\
+    \mathcal{V}_{xx}&=(p-1)x^{p-2}\exp{\lc a(\tau)+b(\tau)v \rc}\\
+    & < 0,
+\end{align*}
+where we used the fact that $p-1<0$ and then also $1-p>0$ remembering $p\in
+(-\infty,0) \cup (0,1)$. Using now the previously found derivative, $h_v=b(\tau)h$,
+of $h$ means we can write equation (26) as:
+\begin{align*}
+    \pi^*(t,x,v)&=\frac{\bar{\lambda}}{1-p}+\frac{\sigma \rho}{1-p}\frac{h_v}{h}\\
+    &=\frac{\bar{\lambda}}{1-p}+\frac{\sigma \rho}{1-p}\frac{b(\tau)h}{h}\\
+    &=\frac{\bar{\lambda}}{1-p}+\frac{\sigma \rho}{1-p}b(\tau),
+\end{align*}
+and thus conclude that the candidate for the optimal investment strategy
+is indeed given by equation (33) with $b(t)$ given by equation (32) and
+$\tau=T-t$ (such that $b(\tau(t)$), yielding:
+\begin{align*}
+    \pi^*(t,x,v)=\frac{\bar{\lambda}}{1-p}+\frac{\sigma \rho}{1-p}b(\tau(t)).
+\end{align*}
+\newpage
 \subsection{Interpretation of the results}
+$\textcolor{blue}{\star}$ All the code can be viewed in \autoref{chap:code}. 
 
+To perform a sensitivity analysis on the optimal investment strategy $\pi^*$ in
+relation to the model parameters, $\pi^*$ has been expressed as a function of
+time $t\in [0,T]$, utilizing equations (33) and (32). As such, we define a
+\texttt{optimalpi}-function defined as in the Handin \#3 description.  This representation enables the
+generation of plots for $\pi^*(t)$ from $t=0$ to expiry-$T$.
 
+Firstly, expiry is set to $T = 10$. We define $t$
+to ensure that there is a time point for each business day within the year,
+resulting in a vector $t = T - \tau$ that includes $252\cdot 10$ time points.
+
+Initially, we will determine the values of the optimal investment strategy
+$\pi^*$ as a function of time using selected parameter values. This strategy
+will act as our benchmark. For the sensitivity analysis, we will examine the
+impact of altering each parameter on $\pi^*$ over time and compare these effects
+against the benchmark. This analysis will involve creating a separate plot for
+each parameter, focusing on one parameter at a time.
+
+The analysis in \texttt{Python}½ is done with the benchmark parameters seen in
+Table 10 with the sensitivity analysis utilizing varying degrees of the
+benchmark. When a varying parameter is scrutinize all others are held constant
+at their benchmark.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{lll}
+    \toprule
+    \textbf{Description} & \textbf{Symbol} & \textbf{Value} \\
+    \midrule
+    Speed of Mean Reversion & $\kappa$ & 1 \\
+    Volatility of the Volatility & $\sigma$ & 0.3 \\
+    Correlation Coefficient & $\rho$ & -0.5 \\
+    Risk-Aversion Parameter & $p$ & 0.5  \\
+    Risk Premium per Unit of Variance & $\bar{\lambda}$ & 0.4 \\
+    Expiry Time & $T$ & 10 \\
+    \bottomrule
+    \end{tabular}
+    \caption{Model parameters used for the sensitivity analysis of $\pi^*$.}
+    \label{table:table10}
+\end{table}
+\newpage
+\begin{figure}[!h]
+    \centering
+    \hspace*{-2cm}
+    \includegraphics[width=0.95\linewidth]{sigma.png}
+    \label{Figure 2}
+    \setlength{\abovecaptionskip}{-5pt}
+    \caption{The optimal investing strategy for varying $\sigma$.}
+\end{figure}
+
+In Figure 2, the benchmark investment strategy is illustrated, where $\sigma$
+has been set to $0.3$. Additionally, the Volatility of the Volatility
+(Vol-of-Vol) parameter $\sigma$ is
+varied, and the optimal investment strategies for $\sigma \in \{0.05,\: 0.5,\: 0.8\}$
+are computed, with all other parameters held constant.
+
+At the expiry, all values of $\sigma$ converge to an optimal investment strategy value of
+$0.8$, indicating uniformity at this point. The graph shows that for the
+benchmark case $0.3$, the optimal investment strategy increases gradually over time
+for the given parameters. As $\sigma$ increases, the initial value of the
+optimal strategy decreases, which aligns with intuitive financial principles;
+higher $\sigma$ typically leads to a more conservative investment stance as
+uncertainty arises at investment-time. The
+end-state uniformity across all values of $\sigma$ implies that higher initial
+values result in a steeper curve as the strategy approaches the expiry,
+reflecting a more aggressive investment strategy over time. Conversely, when
+$\sigma$ is very low, it becomes sensible to increase the optimal investments at
+$t=0$ due to reduced
+uncertainty, suggesting that the optimal investment strategy remains quite
+stable in this scenario. This is entirely reasonable since $\sigma$ represents
+the vol-of-vol, essentially quantifying the variability of
+the variance. As expected, $\pi^*$ will fluctuate more with an increase in the
+vol-of-vol, where uncertainty is higher, and will be more
+consistent under conditions of low volatility. 
+
+Therefore, it is evident that
+$\sigma$ does not influence the optimal investment level at expiry, but affects
+it in earlier periods untill nearing expiry-$T$.
+\newpage
+\begin{figure}[!h]
+    \centering
+    \hspace*{-2cm}
+    \includegraphics[width=0.95\linewidth]{rho.png}
+    \label{Figure 3}
+    \setlength{\abovecaptionskip}{-5pt}
+    \caption{The optimal investing strategy for varying $\rho$.}
+\end{figure}
+
+In Figure 3, the benchmark investment strategy is illustrated, where $\rho$ has
+been set to $-0.5$. Additionally, the Correlation Coefficient $\rho$ is varied, and the
+optimal investment strategies for $\rho \in \{-0.05,\: -0.2,\: -0.8\}$ are computed,
+with all other parameters held constant. Note that from empirical observations of
+the financial markets $\rho<0$.
+
+As previously noted, we observe that at expiry, the optimal investment strategy
+$\pi^*$ consistently attains a value of $0.8$, independent of the chosen $\rho$.
+The variable $\rho$ characterizes the correlation between two Brownian motions.
+Analysis of the plot indicates that a small numerical value of $\rho$
+leads to a higher initial investment.
+Furthermore, the value of the optimal investment strategy remains relatively
+stable over time. Conversely, when $\rho$ is numerically larger, the enhanced negative correlation between the
+Brownian motions necessitates a lower initial optimal investment strategy. This
+scenario results in the optimal investment strategy gradually increasing over
+time, culminating uniformly at $0.8$ by the expiry.  This behavior is a
+consequence of the model dynamics.
+
+The explanation hinges on understanding the relationship between the correlation
+coefficient, $\rho$, and the contributions of the two Brownian motions, $W_1$
+and $W_2^\PP$, to the dynamics of the asset price $S_1$ and its variance $v$.
+If $\rho$ is numerically large, the contribution from $W_2^\PP$ becomes negligible
+for movements in the variance, and thus it is only $W_1^\PP$ that drives both $dv$ and
+$dS_1$. This means that the optimal investment strategy is Initially low as
+there is a strong dependency between movements in both directions of the asset
+price and the variance, leading to a more cautious approach.
+
+Conversely, if $\rho$ is approximately zero, the contribution $W_1^\PP$ to the
+variance is negligible and the variance is driven almost solely by $W_2^\PP$, but the
+price is still driven by $W_1^\PP$. A lower correlation $\rho \approx 0$ means
+that the relationship between
+$S_1$ and $v$ is almost independent which allows for more aggressive investment strategies due to more
+predictable risk management. Furthermore, the lack of uncertainty allows for
+only minor corrections in investment near expiry. Conversely, a higher correlation ($\rho$ numerically large)
+necessitates a more conservative approach due to increased perceived risk and uncertainty
+in the asset’s price movements relative to its variance because of the near
+independent relationsship between the risky asset $S_1$ and $v$.
+
+In conclusion, $\rho$ does not influence the ultimate level of the optimal
+investment strategy at expiry, but is affecting only the strategy in the earlier
+years.
+
+\begin{figure}[!h]
+    \centering
+    \hspace*{-2cm}
+    \includegraphics[width=0.95\linewidth]{kappa.png}
+    \label{Figure 4}
+    \setlength{\abovecaptionskip}{-5pt}
+    \caption{The optimal investing strategy for varying $\kappa$.}
+\end{figure}
+
+In Figure 4, the benchmark iznvestment strategy is illustrated, where $\kappa$ has
+been set to $1$. Additionally, the Mean Reversaion Rate $\kappa$ is varied, and the
+optimal investment strategies for $\kappa \in \{0.5,\: 2, \:3\}$ are computed,
+with all other parameters held constant.
+
+It is clear that at expiration, the optimal investment strategy $\pi^*$ is
+consistently 0.8, unaffected by the value of $\kappa$. The parameter $\kappa$
+denotes the mean reversion rate, reflecting how swiftly the variance of the
+asset returns to its long-term average, $\theta$. According to the curves in
+Figure 4, a
+higher $\kappa$ corresponds to an increased initial investment strategy. This
+makes sense because quicker mean reversion suggests a faster stabilization to
+the equilibrium state, allowing investors to predict future variances more
+confidently and adjust their portfolios aggressively in the short term with a
+higher optimal investment strategy.
+
+On the other hand, a lower $\kappa$ implies a longer duration for the variance to return to the mean, resulting in a more unpredictable variance process and thereby elevating the risk as uncertainty is more predominant until expiry. Consequently, a more conservative initial investment strategy is justified under these circumstances. Such conservative behavior mitigates the risk of exposure to high variance, thus safeguarding the investment against the potential for large fluctuations that could lead to substantial losses.
+
+Therefore, while $\kappa$ has no impact on the optimal investment level at expiration, it significantly influences the investment strategy during the initial years.
+
+\newpage
+\begin{figure}[!h]
+    \centering
+    \hspace*{-2cm}
+    \includegraphics[width=0.95\linewidth]{lambda.png}
+    \label{Figure 5}
+    \setlength{\abovecaptionskip}{-5pt}
+    \caption{The optimal investing strategy for varying $\bar{\lambda}$.}
+\end{figure}
+
+In Figure 5, the benchmark investment strategy is illustrated, where $\bar{\lambda}$ has
+been set to $0.4$. Additionally, the Risk Premium per Unit of Variance $\bar{\lambda}$ is varied, and the
+optimal investment strategies for $\bar{\lambda} \in \{0.1,\: 0.9, \:3\}$ are computed,
+with all other parameters held constant. Note that from empirical observations of
+the financial markets $\bar{\lambda}>0$.
+
+Contrary to the earlier three plots, we now see that $\bar{\lambda}$
+significantly influences the optimal investment strategy at expiry.
+$\bar{\lambda}$ serves as the indicator for volatility risk premium, providing
+insights into traders' risk tolerance and their decision-making aggressiveness.
+It is observed that a high $\bar{\lambda}$ correlates with an equally high
+optimal investment strategy. Essentially, a high $\bar{\lambda}$ suggests that
+the market compensates more for risk-taking, which in turn implies that
+investors are likely to invest more heavily and accept greater risks. According
+to \cite{kraft2005optimal}, there must be an upper limit to $\bar{\lambda}$;
+exceeding this limit would lead to excessively high market rewards for risk,
+rendering equations (31) and (32) invalid solutions for our model. This scenario leads to
+traders being overly optimistic about future gains, which logically results in
+observing elevated levels of optimal investment under high $\bar{\lambda}$.
+Additionally, a lower $\bar{\lambda}$ tends to stabilize the optimal investment
+strategy over time, unlike when $\bar{\lambda} = 3$, where the initial
+investment is significantly high and continues to rise at expiry, suggesting an
+overly generous market reward for risk.
+
+Thus, while a higher $\bar{\lambda}$ generally encourages more aggressive
+investment strategies, reflecting a direct response to the higher rewards for
+risk-taking offered by the market, it is crucial to recognize the limits of this
+parameter. Adhering to realistic and sustainable investment practices requires
+careful calibration of $\bar{\lambda}$ within the models to ensure that the
+investment strategies formulated are both optimal and practical, aligning with
+genuine market dynamics and risk tolerance levels.
+\newpage
+\begin{figure}[!h]
+    \centering
+    \hspace*{-2cm}
+    \includegraphics[width=0.95\linewidth]{p.png}
+    \label{Figure 6}
+    \setlength{\abovecaptionskip}{-5pt}
+    \caption{The optimal investing strategy for varying $p$.}
+\end{figure}
+
+In Figure 6, the benchmark investment strategy is illustrated, where $p$ has
+been set to $0.5$. Additionally, the Risk-Aversion Parameter $p$ is varied, and the
+optimal investment strategies for $p \in \{-5,\:-2,\:0.1,\: 0.8, \:0.9\}$ are computed,
+with all other parameters held constant. Note $p \in (−\infty, 0) \cup (0, 1)$ by assumption.
+
+Similar to $\bar{\lambda}$, we now find that $p$ indeed
+impacts the optimal investment strategy at expiry and, consequently, over the
+long term. The plot reveals that when $p \in (-\infty, 0)$, the optimal
+investment level is quite low and remains consistently stable - or rather constant. Conversely, for
+$p \in (0, 1)$, the optimal investment strategy starts off low when $p$ is near
+0, but is still higher than when $p$ is negative. As $p$ approaches 1, the
+initial optimal investment strategy begins to increase. Notably, as $p$ nears
+its upper limit ($p \approx 1$), the initial optimal investment strategy
+substantially increases, escalating further as we near expiry.
+
+$p$ represents the risk-aversion coefficient, indicating a trader's willingness to accept risk. When $p \in (0, 1)$, it characterizes a trader who is cautious yet open to taking risks, moving towards risk-neutrality as $p$ nears 1. The plot confirms that with such traders, initial investments increase as perceived risks diminish or as potential returns appear more favorable. Specifically, we notice that at $p \approx 1$, optimal investment increases as expiry approaches. This correlates with decreased risk due to the shorter time to maturity, leading to more precise expectations. Additionally, this aligns well with the trader approaching risk-neutrality, allowing for slight variations in the optimal investment strategy over time, unlike the nearly constant strategy observed at lower $p$ values. When $p \in (-\infty, 0)$, traders exhibit an even greater aversion to risk. This reflects precisely what the plot indicates: such traders maintain low and stable initial investments over time. In summary, as anticipated, traders more willing to accept risk ($p \in (0, 1)$) demonstrate more aggressive optimal investment behaviors as expiry approaches, optimizing their expected returns in line with their risk preferences. Conversely, traders who avoid risk ($p \in (-\infty, 0)$) exhibit low and stable optimal investment strategies.
+
+\newpage
+\begin{figure}[!h]
+    \centering
+    \hspace*{-2cm}
+    \includegraphics[width=0.95\linewidth]{T.jpg}
+    \label{Figure 7}
+    \setlength{\abovecaptionskip}{-5pt}
+    \caption{The optimal investing strategy for varying $T$.}
+\end{figure}
+
+In Figure 7, the benchmark investment strategy is illustrated, where $T$ has
+been set to $10$. Additionally, the Expiry Time $T$ is varied, and the
+optimal investment strategies for $T \in \{5, \:30,\: 100\}$ are computed,
+with all other parameters held constant.
+
+We see that changing the expiry time $T$ results in horizontal shifts for the
+curves, meaning, it has no effect on the optimal investment strategy in the
+interval $[0,T]$. This is as expected as - when all other parameters held
+constant - as the investment decision process does not inherently depend on the
+duration of the investment but rather on the underlying asset dynamics and the
+parameters controlling the investment strategy itself. Therefore, the expiry
+time $T$ simply extends or shortens the investment horizon without altering the
+nature or direction of the investments within that period.
 \newpage
 \appendix
 \section{Appendix: Code}\label{chap:code}
 \href{https://github.com/YoussefRaad-mathecon/Handin-3}{GitHub profile
-with the code in \texttt{Python} for Option pricing in the context of the Heston
-model and in R for asset allocation under the Heston model. We frequently refer
+with the code in \texttt{Python} for \textit{Option Pricing in the Context of the Heston
+Model} and \textit{Asset Allocation Under the Heston Model}. We frequently refer
 to and use the parameter $"\lambda"$. It's crucial to understand that this
-"\texttt{lambda}" parameter should not be confused with \texttt{Python}'s
-built-in \texttt{lambda}-function. \texttt{Python}'s \texttt{lambda} function
-are a feature that allows for creating small, anonymous functions at runtime.
+$"\lambda"$ parameter should not be confused with \texttt{Python}'s
+built-in \texttt{lambda}-function in subsection 2.3 and 2.4. \texttt{Python}'s \texttt{lambda} function
+is a feature that allows for creating small, anonymous functions at runtime.
 They are defined using the \texttt{lambda} keyword, followed by a list of
 arguments etc.}
 
